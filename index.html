@@ -1,0 +1,1241 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Zampieri Holding — Trasporti, Logistica e Distribuzione</title>
+<meta name="description" content="Zampieri Holding: trasporti nazionali e internazionali, logistica, distribuzione e sala operativa H24. Flotta a metano Euro 6, certificata ISO 9001 e ISO 45001." />
+<meta name="theme-color" content="#071410" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M6 36 C16 36 18 24 28 24 C36 24 38 16 42 8' stroke='%231fae4a' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='42' cy='8' r='4' fill='%231fae4a'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ---------- Reset ---------- */
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+html{ font-size:16px; -webkit-font-smoothing:antialiased; scroll-behavior:auto; }
+body{ background:var(--bg); color:var(--ink); font-family:'Onest',system-ui,sans-serif; min-height:100vh; overflow-x:clip; }
+a{ color:inherit; text-decoration:none; }
+button{ font:inherit; color:inherit; background:none; border:none; cursor:pointer; }
+ul{ list-style:none; }
+img{ display:block; max-width:100%; }
+input,textarea,select{ font:inherit; color:inherit; }
+.sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+:focus-visible{ outline:2px solid var(--brand-light); outline-offset:2px; }
+@media (prefers-reduced-motion: reduce){ *{ animation-duration:.001ms !important; transition-duration:.001ms !important; } }
+
+/* ---------- Palette & tokens ---------- */
+:root{
+  --bg:#f7f6f2; --ink:#0a0d0b; --ink-deep:#071410; --ink-deep-2:#0b1f16;
+  --brand:#1fae4a; --brand-strong:#0f7d34; --brand-light:#6be08a;
+  --muted:#6b716c; --ghost:#dde0da; --hairline:#e3e5df;
+  --surface:#efeee8; --surface-card:#ffffff; --on-ink:#ffffff;
+  --radius-card:1.5rem; --radius-card-lg:2rem; --radius-pill:62.5rem; --radius-control:0.75rem;
+}
+
+/* ---------- Adaptive rem grid ---------- */
+html{ font-size:16px; }
+@media (max-width:1920px){ html{ font-size:0.833333vw; } }
+@media (max-width:1440px){ html{ font-size:1.111111vw; } }
+@media (max-width:1024px){ html{ font-size:1.5625vw; } }
+@media (max-width:640px){ html{ font-size:4.444444vw; } }
+
+/* ---------- Shell ---------- */
+main{ width:100%; overflow-x:clip; }
+.shell{ max-width:88rem; margin-inline:auto; padding-inline:1.25rem; }
+@media (min-width:640px){ .shell{ padding-inline:2.5rem; } }
+
+/* ---------- Grain texture (dark sections) ---------- */
+.grain{ position:absolute; inset:0; pointer-events:none; opacity:.05; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Eyebrow ---------- */
+.eyebrow{ display:inline-flex; align-items:center; gap:.5rem; font-size:.8rem; font-weight:600; text-transform:uppercase; letter-spacing:.2em; }
+.eyebrow::before{ content:""; width:.4rem; height:.4rem; border-radius:999px; background:var(--brand); flex:none; }
+.eyebrow.dark{ color:rgba(10,13,11,.65); }
+.eyebrow.light{ color:rgba(255,255,255,.72); }
+.eyebrow.light::before{ background:var(--brand-light); }
+
+/* ---------- Headings / line reveal ---------- */
+h1,h2,h3{ font-weight:600; letter-spacing:-.02em; }
+.line-mask{ overflow:hidden; display:block; padding-bottom:.16em; margin-bottom:-.16em; }
+.line-inner{ display:block; transform:translateY(115%); opacity:0; transition:transform .95s cubic-bezier(.16,1,.3,1), opacity .95s cubic-bezier(.16,1,.3,1); transition-delay:var(--d,0s); will-change:transform; }
+[data-reveal].in-view .line-inner{ transform:translateY(0); opacity:1; }
+.word-mask{ overflow:hidden; display:inline-block; padding-bottom:.16em; margin-bottom:-.16em; vertical-align:top; }
+.word-inner{ display:inline-block; transform:translateY(115%); opacity:0; transition:transform 1.05s cubic-bezier(.16,1,.4,1), opacity 1.05s cubic-bezier(.16,1,.4,1); transition-delay:var(--d,0s); }
+[data-reveal].in-view .word-inner{ transform:translateY(0); opacity:1; }
+
+/* ---------- Generic reveal-up ---------- */
+[data-reveal-up]{ opacity:0; transform:translateY(28px); transition:opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); transition-delay:var(--d,0s); }
+[data-reveal-up].in-view{ opacity:1; transform:translateY(0); }
+[data-reveal-scale]{ opacity:0; transform:scale(.9); transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); transition-delay:var(--d,0s); }
+[data-reveal-scale].in-view{ opacity:1; transform:scale(1); }
+
+/* ---------- Buttons ---------- */
+.pill{ display:inline-flex; align-items:center; gap:.75rem; border-radius:var(--radius-pill); font-size:.9rem; font-weight:600; text-transform:uppercase; letter-spacing:.06em; white-space:nowrap; transition:transform .35s cubic-bezier(.34,1.56,.64,1), background .3s, color .3s; }
+.pill:hover{ transform:translateY(-2px); }
+.pill.with-arrow{ padding:.4rem .4rem .4rem 1.5rem; }
+.pill:not(.with-arrow){ padding:.9rem 1.9rem; }
+.pill .arrow-badge{ width:2.25rem; height:2.25rem; border-radius:999px; display:grid; place-items:center; flex:none; transition:transform .3s cubic-bezier(.34,1.56,.64,1); }
+.pill:hover .arrow-badge{ transform:translateX(4px); }
+.pill.dark{ background:var(--ink-deep); color:#fff; }
+.pill.dark:hover{ background:var(--brand-strong); }
+.pill.dark .arrow-badge{ background:#fff; color:var(--ink-deep); }
+.pill.light{ background:#fff; color:var(--ink-deep); }
+.pill.light:hover{ background:var(--brand-light); color:#08210f; }
+.pill.light .arrow-badge{ background:var(--ink-deep); color:#fff; }
+.pill.outline{ border:1.5px solid rgba(255,255,255,.35); color:#fff; background:transparent; }
+.pill.outline:hover{ background:rgba(255,255,255,.12); }
+.pill.outline .arrow-badge{ background:rgba(255,255,255,.15); color:#fff; }
+.pill.outline-dark{ border:1.5px solid var(--hairline); color:var(--ink); background:transparent; }
+.pill.outline-dark:hover{ background:var(--ink); color:#fff; }
+.icon{ width:1em; height:1em; }
+svg.icon{ display:inline-block; }
+
+/* ---------- Loader ---------- */
+#loader{ position:fixed; inset:0; z-index:200; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2rem; background:var(--ink-deep); color:#fff; }
+#loader .brand-row{ display:flex; align-items:center; gap:.6rem; font-size:1.6rem; font-weight:700; text-transform:uppercase; letter-spacing:.2em; opacity:0; transform:translateY(16px); transition:opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1); }
+#loader.mounted .brand-row{ opacity:1; transform:translateY(0); }
+#loader .brand-row svg{ width:1.9rem; height:1.9rem; color:var(--brand-light); }
+#loader .tagline{ max-width:24ch; text-align:center; font-size:.85rem; color:rgba(255,255,255,.55); }
+#loader .progress-wrap{ width:min(20rem,72vw); display:flex; flex-direction:column; gap:.65rem; }
+#loader .track{ height:1px; border-radius:999px; background:rgba(255,255,255,.18); overflow:hidden; }
+#loader .fill{ height:100%; width:0%; background:var(--brand-light); transition:width .08s linear; }
+#loader .meta-row{ display:flex; justify-content:space-between; font-size:.7rem; font-weight:600; text-transform:uppercase; letter-spacing:.08em; color:rgba(255,255,255,.4); }
+#loader .meta-row b{ color:rgba(255,255,255,.85); font-variant-numeric:tabular-nums; }
+#loader.exiting{ transition:transform .85s cubic-bezier(.22,1,.36,1); transform:translateY(-105%); }
+
+/* ---------- Header ---------- */
+#site-header{ position:fixed; inset-inline:0; top:0; z-index:60; padding:1.25rem 1.25rem 0; opacity:0; transform:translateY(-14px); transition:opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+body.is-ready #site-header{ opacity:1; transform:translateY(0); }
+@media (min-width:640px){ #site-header{ padding:1.75rem 2.5rem 0; } }
+#site-header .bar{ display:flex; align-items:center; justify-content:space-between; gap:1.5rem; padding:.6rem .75rem; border-radius:999px; transition:background .4s, box-shadow .4s, backdrop-filter .4s; }
+#site-header.scrolled .bar{ background:rgba(255,255,255,.72); backdrop-filter:blur(16px); box-shadow:0 1rem 2.5rem rgba(7,20,16,.08); }
+#site-header .brand{ display:flex; align-items:center; gap:.55rem; font-size:1rem; font-weight:700; text-transform:uppercase; letter-spacing:.18em; color:#fff; transition:color .4s; }
+#site-header.scrolled .brand{ color:var(--ink-deep); }
+#site-header .brand svg{ width:1.4rem; height:1.4rem; color:var(--brand-light); }
+#site-header.scrolled .brand svg{ color:var(--brand); }
+#site-header nav.main-nav{ display:none; flex:1; justify-content:center; gap:2rem; }
+@media (min-width:1024px){ #site-header nav.main-nav{ display:flex; } }
+#site-header nav.main-nav a{ font-size:.85rem; font-weight:500; color:rgba(255,255,255,.85); transition:color .4s, transform .3s; }
+#site-header.scrolled nav.main-nav a{ color:rgba(10,13,11,.75); }
+#site-header nav.main-nav a:hover{ transform:translateY(-2px); color:#fff; }
+#site-header.scrolled nav.main-nav a:hover{ color:var(--ink); }
+#site-header .right{ display:flex; align-items:center; gap:.75rem; }
+.status-chip{ display:none; align-items:center; gap:.55rem; padding:.5rem .9rem; border-radius:999px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2); color:#fff; font-size:.72rem; font-weight:600; text-transform:uppercase; letter-spacing:.05em; transition:background .4s,border-color .4s,color .4s; }
+@media (min-width:768px){ .status-chip{ display:inline-flex; } }
+#site-header.scrolled .status-chip{ background:rgba(10,13,11,.05); border-color:var(--hairline); color:var(--ink); }
+.status-dot{ width:.5rem; height:.5rem; border-radius:999px; background:var(--brand-light); flex:none; animation:pulse-dot 2s ease-in-out infinite; }
+#site-header.scrolled .status-dot{ background:var(--brand); }
+@keyframes pulse-dot{ 0%,100%{ box-shadow:0 0 0 0 rgba(107,224,138,.55);} 50%{ box-shadow:0 0 0 .45rem rgba(107,224,138,0);} }
+.burger{ width:2.75rem; height:2.75rem; border-radius:999px; display:grid; place-items:center; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.22); transition:background .3s,border-color .3s; flex:none; }
+#site-header.scrolled .burger{ background:rgba(10,13,11,.06); border-color:var(--hairline); }
+.burger:hover{ background:rgba(255,255,255,.28); }
+#site-header.scrolled .burger:hover{ background:rgba(10,13,11,.12); }
+.burger-bars{ display:flex; flex-direction:column; gap:.3rem; }
+.burger-bars span{ width:1.1rem; height:1.5px; background:#fff; border-radius:2px; transition:background .3s; }
+#site-header.scrolled .burger-bars span{ background:var(--ink); }
+.cta-header{ display:none; }
+@media (min-width:900px){ .cta-header{ display:inline-flex; } }
+
+/* ---------- Hero ---------- */
+#home{ position:relative; isolation:isolate; overflow:hidden; border-radius:0 0 2rem 2rem; min-height:38rem; height:calc(100svh); background:var(--ink-deep); color:#fff; display:flex; flex-direction:column; }
+.hero-plate{ position:absolute; inset:0; z-index:-2; overflow:hidden; }
+.hero-plate .layer{ position:absolute; left:0; right:0; top:-14%; height:130%; width:100%; will-change:transform; }
+.hero-plate img{ width:100%; height:100%; object-fit:cover; }
+.hero-plate .overlay{ position:absolute; inset:0; background:linear-gradient(to bottom, rgba(7,20,16,.72), rgba(7,20,16,.35) 45%, rgba(7,20,16,.85)); }
+.hero-title-wrap{ padding:6rem 1.5rem 0; margin-top:auto; }
+@media (min-width:640px){ .hero-title-wrap{ padding-inline:2.5rem; } }
+#hero-title{ font-size:8.6vw; line-height:.92; font-weight:700; text-transform:uppercase; letter-spacing:-.01em; }
+@media (max-width:900px){ #hero-title{ font-size:11vw; } }
+.hero-bottom{ margin-top:1.5rem; padding:0 1.5rem 2.25rem; display:flex; flex-direction:column; gap:1.5rem; }
+@media (min-width:640px){ .hero-bottom{ padding:0 2.5rem 2.75rem; flex-direction:row; justify-content:space-between; align-items:flex-end; gap:2rem; } }
+.hero-tagline{ font-size:1.9rem; font-weight:600; text-transform:uppercase; line-height:.98; letter-spacing:-.01em; color:rgba(255,255,255,.9); }
+.hero-cluster{ display:flex; flex-direction:column; align-items:flex-start; gap:1rem; }
+@media (min-width:640px){ .hero-cluster{ align-items:flex-end; } }
+.hero-cta-row{ display:flex; flex-wrap:wrap; gap:.75rem; }
+
+/* hero carousel card */
+.hero-carousel{ display:none; width:17rem; }
+@media (min-width:860px){ .hero-carousel{ display:block; } }
+.hc-card{ display:flex; gap:.75rem; border-radius:var(--radius-card); border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.08); padding:.75rem; box-shadow:0 1.5rem 3rem rgba(7,20,16,.35); backdrop-filter:blur(14px); transform-style:preserve-3d; transition:transform .25s ease-out; }
+.hc-thumb{ width:3.6rem; height:3.6rem; border-radius:.85rem; overflow:hidden; flex:none; }
+.hc-thumb img{ width:100%; height:100%; object-fit:cover; transition:opacity .5s ease; }
+.hc-body{ display:flex; flex-direction:column; justify-content:center; gap:.2rem; min-width:0; }
+.hc-brand{ font-size:.66rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--brand-light); }
+.hc-title{ font-size:.72rem; text-transform:uppercase; opacity:.85; }
+.hc-cta{ font-size:.62rem; text-decoration:underline; opacity:.8; margin-top:.15rem; }
+.dots{ display:flex; gap:.4rem; margin-top:.65rem; justify-content:center; }
+.dots button{ width:.4rem; height:.4rem; border-radius:999px; background:rgba(255,255,255,.35); transition:all .3s; }
+.dots button.active{ width:1.15rem; background:#fff; }
+
+/* membership-style stat chip */
+.stat-card{ width:100%; max-width:20rem; display:flex; gap:.85rem; align-items:stretch; border-radius:var(--radius-card); border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.08); padding:.85rem; box-shadow:0 1.5rem 3rem rgba(7,20,16,.35); backdrop-filter:blur(14px); transform-style:preserve-3d; transition:transform .25s ease-out; }
+@media (min-width:640px){ .stat-card{ max-width:15.5rem; } }
+.stat-left{ display:flex; flex-direction:column; justify-content:space-between; }
+.stat-value{ font-size:1.9rem; font-weight:700; line-height:1; }
+.stat-avatars{ display:flex; }
+.stat-avatars span{ width:1.25rem; height:1.25rem; border-radius:999px; border:1px solid rgba(7,20,16,.4); margin-left:-.5rem; }
+.stat-avatars span:first-child{ margin-left:0; }
+.stat-caption{ font-size:.66rem; opacity:.82; }
+.stat-photo{ width:4rem; aspect-ratio:3/4; border-radius:.85rem; overflow:hidden; flex:none; }
+.stat-photo img{ width:100%; height:100%; object-fit:cover; }
+
+.status-bar{ border-top:1px solid rgba(255,255,255,.14); }
+.status-bar .shell{ display:flex; align-items:center; justify-content:space-between; gap:.75rem; padding:1.15rem 1.25rem; font-size:.72rem; font-weight:600; text-transform:uppercase; letter-spacing:.05em; color:rgba(255,255,255,.6); }
+@media (min-width:640px){ .status-bar .shell{ padding-inline:2.5rem; } }
+.status-bar .center{ display:none; }
+@media (min-width:640px){ .status-bar .center{ display:inline; } }
+
+/* ---------- Trust / ghost carousel ---------- */
+#perche-noi{ position:relative; isolation:isolate; overflow:hidden; background:var(--bg); padding:5rem 1.25rem; }
+@media (min-width:640px){ #perche-noi{ padding:6.5rem 2.5rem; } }
+.trust-top{ position:relative; z-index:20; display:flex; flex-direction:column; gap:1.5rem; }
+@media (min-width:640px){ .trust-top{ flex-direction:row; justify-content:space-between; } }
+.percent-badge{ width:7rem; height:7rem; border-radius:999px; background:var(--surface); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:.15rem; flex:none; }
+@media (min-width:640px){ .percent-badge{ width:8.5rem; height:8.5rem; } }
+.percent-badge b{ font-size:1.7rem; font-weight:700; }
+.percent-badge span{ font-size:.6rem; color:var(--muted); max-width:7em; line-height:1.2; }
+.badge-card{ max-width:28rem; display:flex; gap:1.25rem; border-radius:var(--radius-card); background:var(--surface); padding:1.5rem; }
+.badge-chip{ width:3.4rem; height:3.4rem; flex:none; border-radius:.85rem; background:#fff; display:flex; align-items:center; justify-content:center; font-size:1.05rem; font-weight:700; }
+.badge-card h3{ font-size:1.15rem; margin-bottom:.4rem; }
+.badge-card p{ font-size:.82rem; color:var(--muted); line-height:1.55; }
+.ghost-heading{ pointer-events:none; user-select:none; z-index:0; position:relative; max-width:88rem; margin:3rem auto 0; }
+.ghost-row{ display:flex; justify-content:space-between; font-size:6.4vw; font-weight:700; text-transform:uppercase; line-height:1.02; letter-spacing:-.02em; color:var(--ghost); }
+@media (max-width:900px){ .ghost-row{ font-size:11vw; } }
+.ghost-row .ink{ color:var(--ink); }
+.ghost-word{ overflow:hidden; display:inline-block; padding-bottom:.14em; margin-bottom:-.14em; }
+.ghost-word span{ display:inline-block; transform:translateY(115%); opacity:0; transition:transform .7s cubic-bezier(.16,1,.3,1), opacity .7s cubic-bezier(.16,1,.3,1); }
+.ghost-row.show .ghost-word span{ transform:translateY(0); opacity:1; }
+.coach-wrap{ position:relative; z-index:10; display:flex; justify-content:center; margin:2.5rem 0; }
+@media (min-width:640px){ .coach-wrap{ position:absolute; inset:0; align-items:center; margin:0; } }
+.coach-card{ width:13rem; transform:rotate(6deg); }
+@media (min-width:640px){ .coach-card{ width:16rem; } }
+.coach-figure{ position:relative; aspect-ratio:3/4; border-radius:var(--radius-card); background:var(--brand); overflow:hidden; box-shadow:0 2rem 3.5rem rgba(7,20,16,.25); }
+.coach-figure img{ width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .6s ease; }
+.coach-figure img.show{ opacity:1; }
+.coach-caption{ position:absolute; inset-inline:.75rem; bottom:.75rem; border-radius:.85rem; background:rgba(7,20,16,.45); backdrop-filter:blur(10px); color:#fff; padding:.55rem .8rem; }
+.coach-caption b{ display:block; font-size:.9rem; }
+.coach-caption span{ font-size:.65rem; opacity:.82; }
+.trust-controls{ position:relative; z-index:20; margin-top:3rem; display:flex; align-items:center; justify-content:space-between; }
+@media (min-width:640px){ .trust-controls{ margin-top:6rem; } }
+.arrow-btn{ width:3rem; height:3rem; border-radius:999px; display:grid; place-items:center; border:1px solid var(--hairline); transition:all .3s; }
+@media (min-width:640px){ .arrow-btn{ width:3.5rem; height:3.5rem; } }
+.arrow-btn:hover{ border-color:var(--ink); transform:scale(1.06); }
+.arrow-btn.solid{ background:var(--ink); border-color:var(--ink); color:#fff; }
+.arrow-btn.solid:hover{ background:var(--brand-strong); }
+.arrow-btn svg{ width:1.15rem; height:1.15rem; }
+.arrow-btn.prev svg{ transform:scaleX(-1); }
+
+/* ---------- Servizi list ---------- */
+#servizi{ background:var(--surface); padding:6rem 1.25rem; }
+@media (min-width:640px){ #servizi{ padding:6rem 2.5rem; } }
+.servizi-list{ margin-top:3.5rem; }
+.servizio-row{ border-top:1px solid var(--hairline); }
+.servizio-row:last-child{ border-bottom:1px solid var(--hairline); }
+.servizio-row a{ display:flex; align-items:center; gap:1.5rem; padding:1.75rem 0; }
+.servizio-idx{ width:2.5rem; font-size:.9rem; font-weight:600; color:var(--muted); flex:none; }
+.servizio-txt{ flex:1; min-width:0; }
+.servizio-txt h3{ font-size:1.5rem; }
+@media (min-width:640px){ .servizio-txt h3{ font-size:1.9rem; } }
+.servizio-txt p{ font-size:.85rem; color:var(--muted); margin-top:.35rem; max-width:38rem; }
+.servizio-arrow{ width:2.75rem; height:2.75rem; border-radius:999px; border:1px solid var(--hairline); display:grid; place-items:center; flex:none; transition:transform .35s cubic-bezier(.34,1.56,.64,1), opacity .35s; opacity:.6; }
+.servizio-row a:hover .servizio-arrow{ transform:translateX(8px); opacity:1; background:var(--ink); color:#fff; border-color:var(--ink); }
+
+/* ---------- Flotta / sedi ---------- */
+#flotta{ background:var(--bg); border-radius:var(--radius-card-lg); margin-top:-2.5rem; padding:4rem 1.25rem 5rem; position:relative; z-index:5; }
+@media (min-width:640px){ #flotta{ padding:4rem 2.5rem 6rem; } }
+.flotta-grid{ display:grid; grid-template-columns:1fr; gap:2.5rem; align-items:end; }
+@media (min-width:840px){ .flotta-grid{ grid-template-columns:1fr 1fr; } }
+.flotta-intro{ max-width:24rem; }
+.flotta-icon{ width:4rem; height:4rem; border-radius:var(--radius-card); overflow:hidden; }
+.flotta-icon img{ width:100%; height:100%; object-fit:cover; }
+.flotta-intro h2{ font-size:2.6rem; line-height:.98; margin-top:1.5rem; }
+.flotta-intro p{ font-size:.9rem; color:var(--muted); margin-top:1.5rem; max-width:20rem; line-height:1.6; }
+.flotta-cards{ display:flex; align-items:flex-end; gap:1.25rem; }
+.flotta-card{ flex:1; }
+.flotta-card:nth-child(2){ margin-bottom:2rem; }
+.flotta-figure{ position:relative; aspect-ratio:3/4; border-radius:var(--radius-card); overflow:hidden; background:var(--surface); transform-style:preserve-3d; transition:transform .35s cubic-bezier(.16,1,.3,1); }
+.flotta-figure img{ width:100%; height:100%; object-fit:cover; transition:transform .6s cubic-bezier(.16,1,.3,1); }
+.flotta-figure:hover img{ transform:scale(1.06); }
+.flotta-caption{ position:absolute; inset-inline:.75rem; bottom:.75rem; border-radius:.85rem; backdrop-filter:blur(10px); color:#fff; padding:.75rem 1rem; }
+.flotta-caption b{ display:block; font-size:.95rem; }
+.flotta-caption span{ font-size:.66rem; opacity:.88; }
+.tone-green .flotta-caption{ background:rgba(31,174,74,.55); }
+.tone-ink .flotta-caption{ background:rgba(7,20,16,.5); }
+
+/* ---------- Sostenibilita ---------- */
+#sostenibilita{ background:var(--ink-deep); color:#fff; border-radius:var(--radius-card-lg); margin-top:.75rem; padding:5rem 1.25rem; position:relative; overflow:hidden; }
+@media (min-width:640px){ #sostenibilita{ padding:6rem 2.5rem; } }
+.sost-grid{ position:relative; z-index:2; display:grid; grid-template-columns:1fr; gap:3rem; }
+@media (min-width:900px){ .sost-grid{ grid-template-columns:1.1fr .9fr; align-items:center; } }
+.quote-mark{ font-size:3.5rem; color:var(--brand-light); line-height:1; }
+blockquote{ font-size:1.4rem; line-height:1.5; font-weight:500; margin-top:1rem; max-width:34rem; }
+@media (min-width:640px){ blockquote{ font-size:1.7rem; } }
+.quote-cite{ margin-top:1.25rem; font-size:.85rem; color:rgba(255,255,255,.65); }
+.quote-cite b{ color:#fff; }
+.sost-side{ display:flex; flex-direction:column; gap:1.5rem; align-items:flex-start; }
+@media (min-width:900px){ .sost-side{ align-items:center; } }
+.iso-badge{ perspective:60rem; width:9rem; height:9rem; }
+.iso-badge-inner{ position:relative; width:100%; height:100%; transform-style:preserve-3d; animation:spin3d 7s linear infinite; }
+@keyframes spin3d{ to{ transform:rotateY(360deg); } }
+.iso-face{ position:absolute; inset:0; border-radius:999px; backface-visibility:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:.15rem; border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.06); backdrop-filter:blur(6px); }
+.iso-face b{ font-size:1.15rem; }
+.iso-face span{ font-size:.6rem; color:rgba(255,255,255,.65); text-transform:uppercase; letter-spacing:.08em; }
+.iso-face.back{ transform:rotateY(180deg); }
+.sost-note{ font-size:.78rem; color:rgba(255,255,255,.6); max-width:16rem; text-align:left; line-height:1.5; }
+@media (min-width:900px){ .sost-note{ text-align:center; } }
+.sost-body{ margin-top:2.5rem; display:grid; grid-template-columns:1fr; gap:2rem; }
+@media (min-width:760px){ .sost-body{ grid-template-columns:1fr 1fr; } }
+.sost-body h3{ font-size:1.05rem; margin-bottom:.6rem; color:var(--brand-light); }
+.sost-body p{ font-size:.88rem; line-height:1.65; color:rgba(255,255,255,.72); }
+
+/* ---------- Stats band ---------- */
+#numeri{ background:var(--ink-deep); color:#fff; border-radius:var(--radius-card-lg); margin-top:.75rem; padding:5rem 1.25rem; position:relative; overflow:hidden; }
+@media (min-width:640px){ #numeri{ padding:5rem 2.5rem; } }
+.stats-grid{ position:relative; z-index:2; display:grid; grid-template-columns:repeat(2,1fr); gap:2rem 2rem; margin-top:4rem; }
+@media (min-width:1024px){ .stats-grid{ grid-template-columns:repeat(4,1fr); } }
+.stat-cell{ border-top:1px solid rgba(255,255,255,.2); padding-top:1.25rem; }
+.stat-cell b{ font-size:3rem; font-weight:700; letter-spacing:-.01em; display:block; }
+@media (min-width:640px){ .stat-cell b{ font-size:3.75rem; } }
+.stat-cell span{ font-size:.85rem; color:rgba(255,255,255,.65); margin-top:.75rem; display:block; }
+
+/* ---------- Valori cards ---------- */
+#valori{ background:var(--bg); padding:5rem 1.25rem; }
+@media (min-width:640px){ #valori{ padding:6rem 2.5rem; } }
+.valori-grid{ display:grid; grid-template-columns:1fr; gap:1.25rem; margin-top:3.5rem; }
+@media (min-width:640px){ .valori-grid{ grid-template-columns:1fr 1fr; } }
+@media (min-width:1024px){ .valori-grid{ grid-template-columns:repeat(4,1fr); } }
+.valore-card{ display:flex; flex-direction:column; justify-content:space-between; height:100%; border-radius:var(--radius-card); background:var(--surface); padding:1.75rem; transition:transform .35s cubic-bezier(.16,1,.3,1); }
+.valore-card:hover{ transform:translateY(-8px); }
+.valore-card .num{ font-size:1.6rem; color:var(--brand); font-weight:700; }
+.valore-card h3{ font-size:1.1rem; margin-top:1rem; }
+.valore-card p{ font-size:.85rem; color:var(--muted); margin-top:.6rem; line-height:1.55; }
+
+/* ---------- Gallery ---------- */
+#gallery{ background:var(--surface); padding:5rem 1.25rem; }
+@media (min-width:640px){ #gallery{ padding:6rem 2.5rem; } }
+.gallery-grid{ margin-top:3.5rem; display:grid; grid-template-columns:repeat(2,1fr); gap:.9rem; }
+@media (min-width:640px){ .gallery-grid{ grid-template-columns:repeat(3,1fr); } }
+.gallery-item{ position:relative; border-radius:1.1rem; overflow:hidden; aspect-ratio:4/3; cursor:pointer; }
+.gallery-item:nth-child(4n+1){ aspect-ratio:1/1; }
+.gallery-item img{ width:100%; height:100%; object-fit:cover; transition:transform .6s cubic-bezier(.16,1,.3,1); }
+.gallery-item:hover img{ transform:scale(1.08); }
+.gallery-item .cap{ position:absolute; inset-inline:.5rem; bottom:.5rem; padding:.4rem .7rem; border-radius:.6rem; background:rgba(7,20,16,.55); backdrop-filter:blur(6px); color:#fff; font-size:.68rem; opacity:0; transform:translateY(6px); transition:all .3s; }
+.gallery-item:hover .cap{ opacity:1; transform:translateY(0); }
+
+#lightbox{ position:fixed; inset:0; z-index:95; display:flex; align-items:center; justify-content:center; padding:1.5rem; background:rgba(7,20,16,.85); backdrop-filter:blur(10px); opacity:0; pointer-events:none; transition:opacity .3s; }
+#lightbox.open{ opacity:1; pointer-events:auto; }
+#lightbox img{ max-width:min(60rem,92vw); max-height:82vh; border-radius:1rem; object-fit:contain; transform:scale(.96); transition:transform .3s; }
+#lightbox.open img{ transform:scale(1); }
+#lightbox .lb-close{ position:absolute; top:1.5rem; right:1.5rem; width:2.75rem; height:2.75rem; border-radius:999px; background:rgba(255,255,255,.12); color:#fff; display:grid; place-items:center; }
+#lightbox .lb-close:hover{ background:rgba(255,255,255,.22); }
+
+/* ---------- Lavora con noi ---------- */
+#lavora-con-noi{ background:var(--bg); padding:5rem 1.25rem; }
+@media (min-width:640px){ #lavora-con-noi{ padding:6rem 2.5rem; } }
+.lavora-inner{ display:flex; flex-direction:column; gap:2rem; border-top:1px solid var(--hairline); padding-top:3rem; }
+@media (min-width:760px){ .lavora-inner{ flex-direction:row; justify-content:space-between; align-items:flex-end; } }
+.lavora-inner h2{ font-size:2.4rem; max-width:16ch; }
+.lavora-inner p{ font-size:.9rem; color:var(--muted); margin-top:1rem; max-width:30rem; }
+
+/* ---------- Footer ---------- */
+#contatti{ background:var(--ink-deep); color:#fff; border-radius:var(--radius-card-lg); margin-top:.75rem; padding:3.5rem 1.25rem; position:relative; overflow:hidden; }
+@media (min-width:640px){ #contatti{ padding:4rem 2.5rem; } }
+.footer-cta{ position:relative; z-index:2; display:flex; flex-direction:column; gap:2rem; border-bottom:1px solid rgba(255,255,255,.15); padding-bottom:3.5rem; }
+@media (min-width:640px){ .footer-cta{ flex-direction:row; justify-content:space-between; align-items:flex-end; } }
+.footer-cta h2{ font-size:2.8rem; line-height:.94; margin-top:1rem; }
+.footer-cols{ position:relative; z-index:2; display:grid; grid-template-columns:1fr; gap:2.5rem; padding-block:3.5rem; }
+@media (min-width:640px){ .footer-cols{ grid-template-columns:1.4fr 1fr 1fr 1fr; } }
+.footer-brand{ max-width:20rem; }
+.footer-brand .brand{ display:flex; align-items:center; gap:.5rem; font-size:1.1rem; font-weight:700; text-transform:uppercase; letter-spacing:.18em; }
+.footer-brand .brand svg{ width:1.3rem; height:1.3rem; color:var(--brand-light); }
+.footer-brand p{ font-size:.85rem; color:rgba(255,255,255,.6); margin-top:1rem; line-height:1.6; }
+.footer-col h4{ font-size:.7rem; text-transform:uppercase; letter-spacing:.16em; color:rgba(255,255,255,.4); margin-bottom:1rem; }
+.footer-col ul{ display:flex; flex-direction:column; gap:.65rem; font-size:.85rem; }
+.footer-col a{ color:rgba(255,255,255,.8); transition:transform .25s, opacity .25s; display:inline-block; }
+.footer-col a:hover{ transform:translateX(4px); opacity:1; color:#fff; }
+address{ font-style:normal; }
+.footer-bar{ position:relative; z-index:2; display:flex; flex-direction:column; gap:1rem; border-top:1px solid rgba(255,255,255,.15); padding-top:2rem; font-size:.78rem; color:rgba(255,255,255,.55); }
+@media (min-width:640px){ .footer-bar{ flex-direction:row; justify-content:space-between; align-items:center; } }
+.footer-bar nav{ display:flex; gap:1.25rem; }
+.footer-bar a:hover{ color:#fff; }
+.social-row{ display:flex; gap:.6rem; }
+.social-btn{ width:2.4rem; height:2.4rem; border-radius:999px; border:1px solid rgba(255,255,255,.2); display:grid; place-items:center; color:#fff; transition:transform .3s, background .3s; }
+.social-btn:hover{ transform:scale(1.12); background:var(--brand-strong); }
+.social-btn svg{ width:1rem; height:1rem; }
+
+/* ---------- Nav overlay ---------- */
+#nav-overlay{ position:fixed; inset:0; z-index:120; display:flex; flex-direction:column; background:var(--ink-deep); color:#fff; opacity:0; pointer-events:none; transition:opacity .4s ease; }
+#nav-overlay.open{ opacity:1; pointer-events:auto; }
+#nav-overlay .top{ display:flex; align-items:center; justify-content:space-between; padding:1.5rem; }
+@media (min-width:640px){ #nav-overlay .top{ padding:1.75rem 2.5rem; } }
+#nav-overlay .brand{ display:flex; align-items:center; gap:.5rem; font-weight:700; text-transform:uppercase; letter-spacing:.18em; }
+#nav-overlay .brand svg{ width:1.3rem; height:1.3rem; color:var(--brand-light); }
+.close-btn{ width:2.5rem; height:2.5rem; border-radius:999px; background:rgba(255,255,255,.14); display:grid; place-items:center; transition:background .3s, transform .3s; }
+.close-btn:hover{ background:rgba(255,255,255,.26); transform:rotate(90deg); }
+#nav-overlay .center{ flex:1; display:flex; flex-direction:column; justify-content:center; padding:0 1.5rem; }
+@media (min-width:640px){ #nav-overlay .center{ padding:0 2.5rem; } }
+.overlay-link{ display:block; padding-block:.4rem; font-size:2.6rem; font-weight:700; letter-spacing:-.02em; opacity:0; transform:translateY(24px); transition:transform .5s ease-out, opacity .5s ease-out, color .3s; }
+@media (min-width:640px){ .overlay-link{ font-size:4.2rem; } }
+#nav-overlay.open .overlay-link{ opacity:1; transform:translateY(0); }
+.overlay-link:hover{ color:var(--brand-light); }
+#nav-overlay .bottom{ border-top:1px solid rgba(255,255,255,.15); padding:1.5rem; display:flex; flex-direction:column; gap:1.25rem; }
+@media (min-width:640px){ #nav-overlay .bottom{ padding:1.75rem 2.5rem; flex-direction:row; justify-content:space-between; align-items:center; } }
+
+/* ---------- Contact modal ---------- */
+#contact-modal{ position:fixed; inset:0; z-index:110; display:flex; align-items:flex-end; justify-content:center; padding:1rem; background:rgba(7,20,16,.45); backdrop-filter:blur(14px); opacity:0; pointer-events:none; transition:opacity .35s; }
+@media (min-width:640px){ #contact-modal{ align-items:center; padding:1.5rem; } }
+#contact-modal.open{ opacity:1; pointer-events:auto; }
+.modal-panel{ position:relative; width:100%; max-width:32rem; max-height:92svh; overflow-y:auto; border-radius:var(--radius-card-lg); background:var(--surface-card); padding:1.75rem; box-shadow:0 3rem 6rem rgba(7,20,16,.4); transform:translateY(28px) scale(.97); opacity:0; transition:transform .4s cubic-bezier(.16,1,.3,1), opacity .4s; }
+@media (min-width:640px){ .modal-panel{ padding:2.25rem; } }
+#contact-modal.open .modal-panel{ transform:translateY(0) scale(1); opacity:1; }
+.modal-close{ position:absolute; right:1rem; top:1rem; width:2.4rem; height:2.4rem; border-radius:999px; background:var(--surface); display:grid; place-items:center; transition:background .3s, transform .3s; }
+.modal-close:hover{ background:var(--hairline); transform:rotate(90deg); }
+.modal-panel h2{ font-size:1.6rem; margin-top:.6rem; }
+@media (min-width:640px){ .modal-panel h2{ font-size:1.9rem; } }
+.modal-form{ margin-top:1.75rem; display:flex; flex-direction:column; gap:1rem; }
+.field label{ display:block; font-size:.72rem; font-weight:600; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:.4rem; }
+.field input, .field select, .field textarea{ width:100%; border:1px solid var(--hairline); background:var(--bg); border-radius:var(--radius-control); padding:.8rem 1rem; font-size:.9rem; outline:none; transition:border-color .25s, background .25s; }
+.field input:focus, .field select:focus, .field textarea:focus{ border-color:var(--brand-light); background:#fff; }
+.field textarea{ resize:none; }
+.modal-submit-row{ margin-top:.5rem; display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
+.modal-note{ font-size:.72rem; color:var(--muted); }
+.modal-success{ text-align:center; padding-block:2rem; display:none; }
+.modal-success.show{ display:block; }
+.modal-form.hide{ display:none; }
+.success-badge{ width:3.5rem; height:3.5rem; margin:0 auto; border-radius:999px; background:var(--brand); color:#fff; display:grid; place-items:center; }
+.modal-success h3{ font-size:1.3rem; margin-top:1rem; }
+.modal-success p{ font-size:.85rem; color:var(--muted); margin-top:.6rem; max-width:32ch; margin-inline:auto; }
+.modal-success .pill{ margin-top:1.5rem; }
+
+/* ---------- Section headers shared ---------- */
+.section-head h2{ font-size:2.5rem; line-height:.98; margin-top:1rem; }
+</style>
+</head>
+<body>
+
+<!-- ===== Loader ===== -->
+<div id="loader">
+  <div class="brand-row">
+    <svg viewBox="0 0 48 48" fill="none"><path d="M6 36 C16 36 18 24 28 24 C36 24 38 16 42 8" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/><circle cx="42" cy="8" r="3.6" fill="currentColor"/></svg>
+    Zampieri Holding
+  </div>
+  <p class="tagline">Trasporti affidabili, puntuali e sicuri — dal 2011 in movimento.</p>
+  <div class="progress-wrap">
+    <div class="track"><div class="fill" id="loader-fill"></div></div>
+    <div class="meta-row"><span>Caricamento</span><b id="loader-count">000</b></div>
+  </div>
+</div>
+
+<!-- ===== Header ===== -->
+<header id="site-header">
+  <div class="bar">
+    <a class="brand" href="#home" data-scroll>
+      <svg viewBox="0 0 48 48" fill="none"><path d="M6 36 C16 36 18 24 28 24 C36 24 38 16 42 8" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/><circle cx="42" cy="8" r="3.6" fill="currentColor"/></svg>
+      Zampieri Holding
+    </a>
+    <nav class="main-nav">
+      <a href="#servizi" data-scroll>Servizi</a>
+      <a href="#flotta" data-scroll>Flotta &amp; Sedi</a>
+      <a href="#sostenibilita" data-scroll>Sostenibilità</a>
+      <a href="#gallery" data-scroll>Gallery</a>
+    </nav>
+    <div class="right">
+      <span class="status-chip"><span class="status-dot"></span>Sala operativa H24</span>
+      <button class="pill dark with-arrow cta-header" data-open-modal="info">
+        Richiedi Informazioni
+        <span class="arrow-badge"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button class="burger" id="burger-btn" aria-label="Apri menu">
+        <span class="burger-bars"><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ===== Hero ===== -->
+  <section id="home">
+    <div class="hero-plate">
+      <div class="layer" id="hero-parallax">
+        <img src="https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-1.jpg" alt="Flotta di mezzi Zampieri Holding Natural Power Transport" fetchpriority="high" loading="eager" />
+      </div>
+      <div class="overlay"></div>
+    </div>
+    <div class="hero-title-wrap">
+      <h1 id="hero-title" data-reveal>
+        <span class="word-mask"><span class="word-inner" style="--d:0s">Trasporti</span></span>
+        <span class="word-mask"><span class="word-inner" style="--d:.14s">affidabili,</span></span>
+        <span class="word-mask"><span class="word-inner" style="--d:.28s">puntuali</span></span>
+        <span class="word-mask"><span class="word-inner" style="--d:.42s">e</span></span>
+        <span class="word-mask"><span class="word-inner" style="--d:.56s">sicuri</span></span>
+      </h1>
+    </div>
+    <div class="hero-bottom">
+      <p class="hero-tagline" data-reveal>
+        <span class="line-mask"><span class="line-inner" style="--d:.75s">Ovunque,</span></span>
+        <span class="line-mask"><span class="line-inner" style="--d:.86s">in sicurezza</span></span>
+      </p>
+      <div class="hero-cluster">
+        <div class="hero-carousel" data-reveal-up style="--d:.65s">
+          <div class="hc-card" id="hc-card">
+            <div class="hc-thumb"><img id="hc-img" src="https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-1.jpg" alt="" /></div>
+            <div class="hc-body">
+              <span class="hc-brand" id="hc-brand">Trasporti</span>
+              <span class="hc-title" id="hc-title">Nazionali &amp; Internazionali</span>
+              <span class="hc-cta">Scopri di più →</span>
+            </div>
+          </div>
+          <div class="dots" id="hc-dots"></div>
+        </div>
+        <div class="stat-card" data-reveal-up style="--d:.78s">
+          <div class="stat-left">
+            <div>
+              <div class="stat-value">1M+</div>
+              <div class="stat-avatars"><span style="background:#6be08a"></span><span style="background:#0b1f16"></span><span style="background:#1fae4a"></span><span style="background:#fff"></span></div>
+            </div>
+            <span class="stat-caption">Km percorsi in sicurezza</span>
+          </div>
+          <div class="stat-photo"><img src="https://zampieriholding.it/wp-content/uploads/2021/05/fiano-romano-4.jpg" alt="Mezzo Zampieri Holding" /></div>
+        </div>
+        <div class="hero-cta-row">
+          <button class="pill dark with-arrow" data-open-modal="info">
+            Richiedi un preventivo
+            <span class="arrow-badge"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </button>
+          <button class="pill outline" data-scroll data-href="#servizi">Scopri i servizi</button>
+        </div>
+      </div>
+    </div>
+    <div class="status-bar">
+      <div class="shell">
+        <span><span class="status-dot" style="display:inline-block;margin-right:.4rem"></span>Sala operativa attiva 24/7</span>
+        <span class="center">Flotta Euro 6 a metano</span>
+        <span>Scorri per scoprire ↓</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Trust / ghost carousel ===== -->
+  <section id="perche-noi">
+    <div class="trust-top">
+      <div class="percent-badge" data-reveal-scale>
+        <b>100%</b>
+        <span>Qualità e sicurezza in ogni consegna</span>
+      </div>
+      <div class="badge-card" data-reveal-up style="--d:.12s">
+        <div class="badge-chip">#01</div>
+        <div>
+          <h3>Perché scegliere Zampieri Holding</h3>
+          <p>Gestiamo con grande accuratezza ed estrema affidabilità tutti i processi di scambio delle informazioni, offrendo soluzioni di elevata qualità, puntuali e complete.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ghost-heading">
+      <div class="ghost-row show" id="ghost-row-1">
+        <span class="ghost-word"><span id="gw-0"></span></span>
+        <span class="ghost-word"><span id="gw-1"></span></span>
+      </div>
+      <div class="ghost-row show" id="ghost-row-2">
+        <span class="ghost-word"><span class="ink" id="gw-2"></span></span>
+        <span class="ghost-word"><span id="gw-3"></span></span>
+      </div>
+      <div class="coach-wrap">
+        <div class="coach-card">
+          <div class="coach-figure" id="coach-figure">
+            <img class="show" data-idx="0" src="https://zampieriholding.it/wp-content/uploads/2021/05/sede_treviso-3.jpg" alt="Team Zampieri Holding" />
+            <img data-idx="1" src="https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-10.jpg" alt="Sala operativa Zampieri Holding" />
+            <img data-idx="2" src="https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-14.jpg" alt="Flotta ZH Green Transport" />
+            <div class="coach-caption">
+              <b id="coach-name">Il nostro Team</b>
+              <span id="coach-role">In ogni sede</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trust-controls">
+      <button class="arrow-btn outline prev" id="trust-prev" aria-label="Precedente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <div class="dots" id="trust-dots"></div>
+      <button class="arrow-btn solid next" id="trust-next" aria-label="Successivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </div>
+  </section>
+
+  <!-- ===== Servizi ===== -->
+  <section id="servizi">
+    <div class="shell">
+      <div class="section-head" data-reveal>
+        <div class="eyebrow dark">I nostri servizi</div>
+        <h2>
+          <span class="line-mask"><span class="line-inner" style="--d:0s">Soluzioni per</span></span>
+          <span class="line-mask"><span class="line-inner" style="--d:.12s">ogni esigenza</span></span>
+        </h2>
+      </div>
+      <ul class="servizi-list">
+        <li class="servizio-row" data-reveal-up style="--d:0s">
+          <a href="#contatti" data-scroll>
+            <span class="servizio-idx">01</span>
+            <span class="servizio-txt">
+              <h3>Trasporti</h3>
+              <p>Trasporti nazionali e internazionali, anche per merci delicate e speciali, con la massima sicurezza.</p>
+            </span>
+            <span class="servizio-arrow"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </li>
+        <li class="servizio-row" data-reveal-up style="--d:.09s">
+          <a href="#contatti" data-scroll>
+            <span class="servizio-idx">02</span>
+            <span class="servizio-txt">
+              <h3>Localizzazione mezzi</h3>
+              <p>Tracciabilità completa della merce lungo tutta la supply chain, per la massima trasparenza.</p>
+            </span>
+            <span class="servizio-arrow"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </li>
+        <li class="servizio-row" data-reveal-up style="--d:.18s">
+          <a href="#contatti" data-scroll>
+            <span class="servizio-idx">03</span>
+            <span class="servizio-txt">
+              <h3>Logistica</h3>
+              <p>Progettiamo ogni fase del trasporto con tecnologie all'avanguardia e tempi sempre rispettati.</p>
+            </span>
+            <span class="servizio-arrow"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </li>
+        <li class="servizio-row" data-reveal-up style="--d:.27s">
+          <a href="#contatti" data-scroll>
+            <span class="servizio-idx">04</span>
+            <span class="servizio-txt">
+              <h3>Distribuzione</h3>
+              <p>Distribuzione primaria e secondaria capillare, tra piattaforme, depositi e clienti finali.</p>
+            </span>
+            <span class="servizio-arrow"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </li>
+        <li class="servizio-row" data-reveal-up style="--d:.36s">
+          <a href="#contatti" data-scroll>
+            <span class="servizio-idx">05</span>
+            <span class="servizio-txt">
+              <h3>Officina Interna</h3>
+              <p>Officina interna e officine mobili per manutenzioni rapide, anche fuori sede.</p>
+            </span>
+            <span class="servizio-arrow"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </li>
+        <li class="servizio-row" data-reveal-up style="--d:.45s">
+          <a href="#contatti" data-scroll>
+            <span class="servizio-idx">06</span>
+            <span class="servizio-txt">
+              <h3>Sala Operativa H24</h3>
+              <p>Monitoraggio e coordinamento attivo 24 ore su 24, ogni giorno dell'anno.</p>
+            </span>
+            <span class="servizio-arrow"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== Flotta & Sedi ===== -->
+  <section id="flotta">
+    <div class="shell flotta-grid">
+      <div class="flotta-intro">
+        <div class="flotta-icon" data-reveal-scale>
+          <img src="https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-3.jpg" alt="Dettaglio mezzo Zampieri Holding" />
+        </div>
+        <h2 data-reveal>
+          <span class="line-mask"><span class="line-inner" style="--d:0s">La nostra</span></span>
+          <span class="line-mask"><span class="line-inner" style="--d:.12s">Flotta</span></span>
+          <span class="line-mask"><span class="line-inner" style="--d:.24s">su strada</span></span>
+        </h2>
+        <p data-reveal-up style="--d:.3s">Un parco mezzi moderno, di ultima generazione, tutto a metano e classe ambientale Euro 6. Disponiamo anche di veicoli per il trasporto combinato ferroviario.</p>
+      </div>
+      <div class="flotta-cards">
+        <div class="flotta-card tone-green" data-reveal-up style="--d:0s">
+          <div class="flotta-figure" data-tilt>
+            <img src="https://zampieriholding.it/wp-content/uploads/2021/05/fiano-romano-4.jpg" alt="Sede operativa di Fiano Romano" />
+            <div class="flotta-caption">
+              <b>Sede di Fiano Romano</b>
+              <span>Il cuore della nostra distribuzione nel Lazio.</span>
+            </div>
+          </div>
+        </div>
+        <div class="flotta-card tone-ink" data-reveal-up style="--d:.14s">
+          <div class="flotta-figure" data-tilt>
+            <img src="https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-13.jpg" alt="Team e flotta ZH Green Transport" />
+            <div class="flotta-caption">
+              <b>ZH Green Transport</b>
+              <span>La flotta Natural Power schierata nel nostro piazzale.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Sostenibilita ===== -->
+  <section id="sostenibilita">
+    <div class="grain"></div>
+    <div class="shell sost-grid">
+      <div data-reveal-up>
+        <div class="eyebrow light">Trasporti Ecosostenibili</div>
+        <div class="quote-mark">"</div>
+        <blockquote>Abbiamo fatto degli importanti passi avanti lungo il nostro percorso di sostenibilità ambientale: il compimento del progetto sotto l'egida del Ministero è al momento il nostro fiore all'occhiello.</blockquote>
+        <p class="quote-cite"><b>Giancarlo Zampieri</b> — Presidente del gruppo Zampieri Holding</p>
+      </div>
+      <div class="sost-side" data-reveal-scale style="--d:.15s">
+        <div class="iso-badge">
+          <div class="iso-badge-inner">
+            <div class="iso-face front"><b>ISO 9001</b><span>Qualità</span></div>
+            <div class="iso-face back"><b>ISO 45001</b><span>Sicurezza sul lavoro</span></div>
+          </div>
+        </div>
+        <p class="sost-note">Accordo volontario con il Ministero dell'Ambiente — 2014</p>
+      </div>
+    </div>
+    <div class="shell sost-body">
+      <div data-reveal-up style="--d:.05s">
+        <h3>Green Revolution</h3>
+        <p>Da sempre siamo un punto di riferimento per i trasporti ecosostenibili a Roma. Dopo l'accordo volontario firmato nel 2014, abbiamo avviato una vera e propria green revolution per contribuire concretamente alla lotta ai cambiamenti climatici.</p>
+      </div>
+      <div data-reveal-up style="--d:.15s">
+        <h3>Carbon footprint certificata</h3>
+        <p>Con il CURA — Consorzio Universitario di Ricerca Applicata dell'Università di Padova — abbiamo calcolato la nostra carbon footprint (ISO 14067, metodologia Life Cycle Assessment). Le emissioni residue sono compensate con un progetto idroelettrico in Turchia.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Stats ===== -->
+  <section id="numeri">
+    <div class="grain"></div>
+    <div class="shell" style="position:relative;z-index:2">
+      <div class="eyebrow light" data-reveal-up>Numeri che parlano</div>
+      <h2 class="section-head" data-reveal style="margin-top:1rem">
+        <span class="line-mask"><span class="line-inner" style="--d:0s">Un'azienda che</span></span>
+        <span class="line-mask"><span class="line-inner" style="--d:.12s">lascia il segno</span></span>
+      </h2>
+      <dl class="stats-grid">
+        <div class="stat-cell" data-reveal-up style="--d:0s"><b data-count="1000000" data-suffix="+">0</b><span>Km percorsi</span></div>
+        <div class="stat-cell" data-reveal-up style="--d:.11s"><b data-count="15">0</b><span>Anni di esperienza</span></div>
+        <div class="stat-cell" data-reveal-up style="--d:.22s"><b data-count="24" data-suffix="/7">0</b><span>Sala operativa attiva</span></div>
+        <div class="stat-cell" data-reveal-up style="--d:.33s"><b data-count="2">0</b><span>Certificazioni ISO</span></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ===== Valori ===== -->
+  <section id="valori">
+    <div class="shell">
+      <div class="section-head" data-reveal>
+        <div class="eyebrow dark">Perché sceglierci</div>
+        <h2>
+          <span class="line-mask"><span class="line-inner" style="--d:0s">Al vostro fianco,</span></span>
+          <span class="line-mask"><span class="line-inner" style="--d:.12s">ogni giorno</span></span>
+        </h2>
+      </div>
+      <div class="valori-grid">
+        <div class="valore-card" data-reveal-up style="--d:0s">
+          <div class="num">01</div>
+          <div><h3>Team dedicato</h3><p>Un referente unico per ogni cliente, sempre raggiungibile.</p></div>
+        </div>
+        <div class="valore-card" data-reveal-up style="--d:.1s">
+          <div class="num">02</div>
+          <div><h3>Tariffe trasparenti</h3><p>Preventivi chiari, senza sorprese in fattura.</p></div>
+        </div>
+        <div class="valore-card" data-reveal-up style="--d:.2s">
+          <div class="num">03</div>
+          <div><h3>Consegne rapide</h3><p>Puntualità garantita su ogni tratta, nazionale e internazionale.</p></div>
+        </div>
+        <div class="valore-card" data-reveal-up style="--d:.3s">
+          <div class="num">04</div>
+          <div><h3>Magazzino di stoccaggio</h3><p>Spazi attrezzati per la gestione flessibile delle merci.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Gallery ===== -->
+  <section id="gallery">
+    <div class="shell">
+      <div class="section-head" data-reveal>
+        <div class="eyebrow dark">Gallery</div>
+        <h2>
+          <span class="line-mask"><span class="line-inner" style="--d:0s">La nostra flotta,</span></span>
+          <span class="line-mask"><span class="line-inner" style="--d:.12s">i nostri luoghi</span></span>
+        </h2>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item" data-reveal-scale style="--d:0s" data-full="https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-1.jpg"><img loading="lazy" src="https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-1.jpg" alt="Flotta Natural Power" /><span class="cap">Flotta Natural Power</span></div>
+        <div class="gallery-item" data-reveal-scale style="--d:.05s" data-full="https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-2.jpg"><img loading="lazy" src="https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-2.jpg" alt="Mezzo pesante" /><span class="cap">Mezzo pesante</span></div>
+        <div class="gallery-item" data-reveal-scale style="--d:.1s" data-full="https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-10.jpg"><img loading="lazy" src="https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-10.jpg" alt="Lavaggio mezzi ZHL" /><span class="cap">Lavaggio mezzi ZHL</span></div>
+        <div class="gallery-item" data-reveal-scale style="--d:.15s" data-full="https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-13.jpg"><img loading="lazy" src="https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-13.jpg" alt="Il team Zampieri Holding" /><span class="cap">Il nostro team</span></div>
+        <div class="gallery-item" data-reveal-scale style="--d:.2s" data-full="https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-14.jpg"><img loading="lazy" src="https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-14.jpg" alt="Piazzale ZH Green Transport" /><span class="cap">Piazzale ZH Green Transport</span></div>
+        <div class="gallery-item" data-reveal-scale style="--d:.25s" data-full="https://zampieriholding.it/wp-content/uploads/2021/05/fiano-romano-4.jpg"><img loading="lazy" src="https://zampieriholding.it/wp-content/uploads/2021/05/fiano-romano-4.jpg" alt="Sede di Fiano Romano" /><span class="cap">Sede di Fiano Romano</span></div>
+        <div class="gallery-item" data-reveal-scale style="--d:.3s" data-full="https://zampieriholding.it/wp-content/uploads/2021/05/sede_treviso-3.jpg"><img loading="lazy" src="https://zampieriholding.it/wp-content/uploads/2021/05/sede_treviso-3.jpg" alt="Team a Treviso" /><span class="cap">Team a Treviso</span></div>
+        <div class="gallery-item" data-reveal-scale style="--d:.35s" data-full="https://zampieriholding.it/wp-content/uploads/2021/05/sede-olbia.jpeg"><img loading="lazy" src="https://zampieriholding.it/wp-content/uploads/2021/05/sede-olbia.jpeg" alt="Sede di Olbia" /><span class="cap">Sede di Olbia</span></div>
+        <div class="gallery-item" data-reveal-scale style="--d:.4s" data-full="https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-3.jpg"><img loading="lazy" src="https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-3.jpg" alt="Dettaglio flotta" /><span class="cap">Dettaglio flotta</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Lavora con noi ===== -->
+  <section id="lavora-con-noi">
+    <div class="shell lavora-inner">
+      <div data-reveal-up>
+        <div class="eyebrow dark">Lavora con noi</div>
+        <h2 style="margin-top:1rem">Entra nel nostro equipaggio</h2>
+        <p>Cerchiamo autisti e personale amministrativo per far crescere insieme la nostra flotta.</p>
+      </div>
+      <button class="pill dark with-arrow" data-open-modal="lavoro" data-reveal-up style="--d:.15s">
+        Invia candidatura
+        <span class="arrow-badge"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+    </div>
+  </section>
+</main>
+
+<!-- ===== Footer ===== -->
+<footer id="contatti">
+  <div class="grain"></div>
+  <div class="shell footer-cta">
+    <div data-reveal-up>
+      <div class="eyebrow light">Contattaci</div>
+      <h2>Pronti a<br>partire?</h2>
+    </div>
+    <button class="pill light with-arrow" data-open-modal="info" data-reveal-up style="--d:.15s">
+      Richiedi Informazioni
+      <span class="arrow-badge"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+    </button>
+  </div>
+  <div class="shell footer-cols">
+    <div class="footer-brand">
+      <div class="brand">
+        <svg viewBox="0 0 48 48" fill="none"><path d="M6 36 C16 36 18 24 28 24 C36 24 38 16 42 8" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/><circle cx="42" cy="8" r="3.6" fill="currentColor"/></svg>
+        Zampieri Holding
+      </div>
+      <p>Trasporti, logistica e distribuzione dal 2011. Flotta a metano Euro 6, certificata ISO 9001 e ISO 45001.</p>
+    </div>
+    <nav class="footer-col">
+      <h4>Servizi</h4>
+      <ul>
+        <li><a href="#servizi" data-scroll>Trasporti</a></li>
+        <li><a href="#servizi" data-scroll>Localizzazione mezzi</a></li>
+        <li><a href="#servizi" data-scroll>Logistica</a></li>
+        <li><a href="#servizi" data-scroll>Distribuzione</a></li>
+        <li><a href="#servizi" data-scroll>Officina Interna</a></li>
+        <li><a href="#servizi" data-scroll>Sala Operativa H24</a></li>
+      </ul>
+    </nav>
+    <nav class="footer-col">
+      <h4>Azienda</h4>
+      <ul>
+        <li><a href="#perche-noi" data-scroll>Chi siamo</a></li>
+        <li><a href="#flotta" data-scroll>La nostra flotta</a></li>
+        <li><a href="#sostenibilita" data-scroll>Sostenibilità</a></li>
+        <li><a href="#lavora-con-noi" data-scroll>Lavora con noi</a></li>
+        <li><a href="https://zampieriholding.it/whistleblowing" target="_blank" rel="noopener">Whistleblowing</a></li>
+      </ul>
+    </nav>
+    <div class="footer-col">
+      <h4>Contatti</h4>
+      <address style="font-size:.85rem; color:rgba(255,255,255,.8); line-height:1.7">
+        <b style="color:#fff">Sede legale</b><br>
+        <a href="https://goo.gl/maps/Q998ZBPbuw6uA3kr9" target="_blank" rel="noopener">Via Lima 41, 00198 Roma</a><br>
+        <a href="tel:+390683651366">(39) 06 8365 1366</a><br><br>
+        <b style="color:#fff">Sede operativa</b><br>
+        Via Procoio 49, Fiano Romano (RM)<br>
+        <a href="tel:+39076546341">(39) 076546341</a><br><br>
+        <a href="mailto:info@zampieriholding.it">info@zampieriholding.it</a>
+      </address>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <span>© 2026 Zampieri Holding S.r.l. — P.IVA 11361441006</span>
+    <div class="social-row">
+      <a class="social-btn" href="https://www.facebook.com/zampieriholdingsrl/?locale=it_IT" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h-1.5c-.8 0-1.5.7-1.5 1.5V11h3l-.4 3H11v6h-3v-6H6.5v-3H8V9.2C8 7 9.7 5.3 11.9 5.3H14V8Z"/></svg>
+      </a>
+      <a class="social-btn" href="https://www.instagram.com/zampieriholding/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </div>
+    <nav>
+      <a href="https://www.iubenda.com/privacy-policy/80531615" target="_blank" rel="noopener">Privacy Policy</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- ===== Nav overlay ===== -->
+<div id="nav-overlay">
+  <div class="top">
+    <div class="brand">
+      <svg viewBox="0 0 48 48" fill="none"><path d="M6 36 C16 36 18 24 28 24 C36 24 38 16 42 8" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/><circle cx="42" cy="8" r="3.6" fill="currentColor"/></svg>
+      Zampieri Holding
+    </div>
+    <button class="close-btn" id="nav-close" aria-label="Chiudi menu">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="center">
+    <a class="overlay-link" href="#home" data-scroll>Home</a>
+    <a class="overlay-link" href="#servizi" data-scroll>Servizi</a>
+    <a class="overlay-link" href="#flotta" data-scroll>Flotta &amp; Sedi</a>
+    <a class="overlay-link" href="#sostenibilita" data-scroll>Sostenibilità</a>
+    <a class="overlay-link" href="#gallery" data-scroll>Gallery</a>
+    <a class="overlay-link" href="#lavora-con-noi" data-scroll>Lavora con noi</a>
+  </div>
+  <div class="bottom">
+    <span style="font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.5)">Sala operativa attiva 24/7</span>
+    <button class="pill light with-arrow" data-open-modal="info">
+      Richiedi Informazioni
+      <span class="arrow-badge"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </button>
+  </div>
+</div>
+
+<!-- ===== Contact modal ===== -->
+<div id="contact-modal">
+  <div class="modal-panel">
+    <button class="modal-close" id="modal-close" aria-label="Chiudi">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="eyebrow dark">Contattaci</div>
+    <h2 id="modal-title">Raccontaci il tuo progetto</h2>
+    <form class="modal-form" id="contact-form" novalidate>
+      <div class="field">
+        <label for="f-name">Nome e cognome</label>
+        <input id="f-name" type="text" placeholder="Mario Rossi" required />
+      </div>
+      <div class="field">
+        <label for="f-email">Email</label>
+        <input id="f-email" type="email" placeholder="tu@azienda.it" required />
+      </div>
+      <div class="field">
+        <label for="f-subject">Come possiamo aiutarti?</label>
+        <select id="f-subject">
+          <option>Richiesta informazioni</option>
+          <option>Preventivo trasporto</option>
+          <option>Candidatura — Autista</option>
+          <option>Candidatura — Amministrativo</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-message">Messaggio</label>
+        <textarea id="f-message" rows="4" placeholder="Raccontaci di cosa hai bisogno…" required></textarea>
+      </div>
+      <div class="modal-submit-row">
+        <span class="modal-note">Ti risponderemo entro un giorno lavorativo.</span>
+        <button class="pill dark" type="submit" id="submit-btn">Invia richiesta</button>
+      </div>
+    </form>
+    <div class="modal-success" id="modal-success">
+      <div class="success-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div>
+      <h3>Richiesta ricevuta</h3>
+      <p id="modal-success-text">Grazie! Ti ricontatteremo al più presto.</p>
+      <button class="pill dark" id="modal-done">Chiudi</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Lightbox ===== -->
+<div id="lightbox">
+  <button class="lb-close" id="lb-close" aria-label="Chiudi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <img id="lb-img" src="" alt="" />
+</div>
+
+<script type="importmap">
+{ "imports": { "lenis": "https://unpkg.com/lenis@1.3.23/dist/lenis.mjs" } }
+</script>
+<script type="module">
+import Lenis from 'lenis';
+
+/* ---------- Adaptive grid (scale-up above 1920px) ---------- */
+function applyAdaptiveGrid(){
+  const FONT_BASE = 16, baseWidth = 1920, coef = 0.6666;
+  const w = window.innerWidth;
+  const widthReduction = ((baseWidth - w) / baseWidth) * 100;
+  const size = FONT_BASE - (FONT_BASE * (widthReduction * coef)) / 100;
+  if (size > FONT_BASE) document.documentElement.style.fontSize = size + 'px';
+  else document.documentElement.style.removeProperty('font-size');
+}
+applyAdaptiveGrid();
+addEventListener('resize', applyAdaptiveGrid);
+
+/* ---------- Lenis ---------- */
+window.scrollTo(0,0);
+const lenis = new Lenis({ smoothWheel: true });
+function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+requestAnimationFrame(raf);
+
+let scrollLocks = 0;
+function stopScroll(){
+  scrollLocks++; lenis.stop();
+  document.documentElement.style.position='relative';
+  document.documentElement.style.overflow='hidden';
+  document.documentElement.style.height='100%';
+}
+function startScroll(){
+  scrollLocks = Math.max(0, scrollLocks-1);
+  if (scrollLocks>0) return;
+  lenis.start();
+  document.documentElement.style.removeProperty('position');
+  document.documentElement.style.removeProperty('overflow');
+  document.documentElement.style.removeProperty('height');
+}
+function scrollToId(id){
+  const el = document.querySelector(id);
+  if (!el) return;
+  lenis.scrollTo(el, { offset: 0 });
+}
+document.querySelectorAll('[data-scroll]').forEach(a=>{
+  a.addEventListener('click', (e)=>{
+    const href = a.getAttribute('data-href') || a.getAttribute('href');
+    if (!href || !href.startsWith('#')) return;
+    e.preventDefault();
+    closeNav(); closeModal();
+    scrollToId(href);
+  });
+});
+
+/* ---------- Loader ---------- */
+const loader = document.getElementById('loader');
+const loaderFill = document.getElementById('loader-fill');
+const loaderCount = document.getElementById('loader-count');
+const MIN_VISIBLE_MS = 1400, MAX_VISIBLE_MS = 2600, EXIT_MS = 850;
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+stopScroll();
+requestAnimationFrame(()=>loader.classList.add('mounted'));
+
+function easeInOutCubic(t){ return t<0.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2; }
+function runProgress(){
+  const dur = reduceMotion ? 60 : (MIN_VISIBLE_MS - 120);
+  const start = performance.now();
+  function tick(now){
+    const t = Math.min(1, (now-start)/dur);
+    const eased = easeInOutCubic(t);
+    const pct = Math.round(eased*100);
+    loaderFill.style.width = pct + '%';
+    loaderCount.textContent = String(pct).padStart(3,'0');
+    if (t<1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+setTimeout(runProgress, 120);
+
+let loaderDone = false;
+function finishLoader(){
+  if (loaderDone) return; loaderDone = true;
+  document.body.classList.add('is-ready');
+  startScroll();
+  loader.classList.add('exiting');
+  setTimeout(()=>loader.remove(), reduceMotion?10:EXIT_MS);
+}
+window.addEventListener('load', ()=> setTimeout(finishLoader, reduceMotion?200:MIN_VISIBLE_MS));
+setTimeout(finishLoader, reduceMotion?250:MAX_VISIBLE_MS);
+
+/* ---------- Header scroll state ---------- */
+const header = document.getElementById('site-header');
+lenis.on('scroll', ({ scroll })=>{
+  header.classList.toggle('scrolled', scroll > 40);
+});
+
+/* ---------- Reveal observer ---------- */
+const revealTargets = document.querySelectorAll('[data-reveal],[data-reveal-up],[data-reveal-scale]');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if (entry.isIntersecting){
+      entry.target.classList.add('in-view');
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: .2 });
+revealTargets.forEach(el=>io.observe(el));
+
+/* ---------- Hero mini-carousel ---------- */
+const heroSlides = [
+  { img:'https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-1.jpg', brand:'Trasporti', title:'Nazionali & Internazionali' },
+  { img:'https://zampieriholding.it/wp-content/uploads/2021/05/fiano-romano-4.jpg', brand:'Distribuzione', title:'Capillare su Roma' },
+  { img:'https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-10.jpg', brand:'Sala Operativa', title:'Attiva H24' },
+];
+let hcIndex = 0;
+const hcImg = document.getElementById('hc-img');
+const hcBrand = document.getElementById('hc-brand');
+const hcTitle = document.getElementById('hc-title');
+const hcDots = document.getElementById('hc-dots');
+heroSlides.forEach((_,i)=>{
+  const b = document.createElement('button');
+  if (i===0) b.classList.add('active');
+  b.addEventListener('click', ()=>setHero(i));
+  hcDots.appendChild(b);
+});
+function setHero(i){
+  hcIndex = i;
+  const s = heroSlides[i];
+  hcImg.style.opacity = 0;
+  setTimeout(()=>{ hcImg.src = s.img; hcImg.style.opacity = 1; }, 220);
+  hcBrand.textContent = s.brand;
+  hcTitle.textContent = s.title;
+  [...hcDots.children].forEach((d,idx)=>d.classList.toggle('active', idx===i));
+}
+setInterval(()=> setHero((hcIndex+1)%heroSlides.length), 3800);
+
+/* ---------- Trust ghost carousel ---------- */
+const trustSlides = [
+  { words:['Qualità','Certificata','Sicurezza','Totale'], img:'https://zampieriholding.it/wp-content/uploads/2021/05/sede_treviso-3.jpg', name:'Il nostro Team', role:'In ogni sede' },
+  { words:['Presenza','Costante','Squadra','Dedicata'], img:'https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-10.jpg', name:'Sala Operativa', role:'Attiva H24' },
+  { words:['Tariffe','Trasparenti','Consegne','Rapide'], img:'https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-14.jpg', name:'La nostra Flotta', role:'Euro 6 a metano' },
+];
+let trustIndex = 0;
+const gw = [0,1,2,3].map(i=>document.getElementById('gw-'+i));
+const rows = [document.getElementById('ghost-row-1'), document.getElementById('ghost-row-2')];
+const coachFigure = document.getElementById('coach-figure');
+const coachName = document.getElementById('coach-name');
+const coachRole = document.getElementById('coach-role');
+const trustDots = document.getElementById('trust-dots');
+trustSlides.forEach((_,i)=>{
+  const b = document.createElement('button');
+  if (i===0) b.classList.add('active');
+  b.addEventListener('click', ()=>setTrust(i));
+  trustDots.appendChild(b);
+});
+function setTrust(i){
+  trustIndex = (i+trustSlides.length)%trustSlides.length;
+  const s = trustSlides[trustIndex];
+  rows.forEach(r=>r.classList.remove('show'));
+  gw.forEach((el,idx)=> el.textContent = s.words[idx]);
+  requestAnimationFrame(()=> requestAnimationFrame(()=> rows.forEach(r=>r.classList.add('show'))));
+  coachFigure.querySelectorAll('img').forEach(im=> im.classList.toggle('show', Number(im.dataset.idx)===trustIndex));
+  coachName.textContent = s.name;
+  coachRole.textContent = s.role;
+  [...trustDots.children].forEach((d,idx)=>d.classList.toggle('active', idx===trustIndex));
+}
+setTrust(0);
+document.getElementById('trust-prev').addEventListener('click', ()=>setTrust(trustIndex-1));
+document.getElementById('trust-next').addEventListener('click', ()=>setTrust(trustIndex+1));
+setInterval(()=> setTrust(trustIndex+1), 6000);
+
+/* ---------- Stats count-up ---------- */
+const statEls = document.querySelectorAll('[data-count]');
+const statIo = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if (!entry.isIntersecting) return;
+    statIo.unobserve(entry.target);
+    const el = entry.target;
+    const target = Number(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const dur = 1500;
+    const start = performance.now();
+    function tick(now){
+      const t = Math.min(1, (now-start)/dur);
+      const eased = 1-Math.pow(1-t,3);
+      const val = Math.round(eased*target);
+      el.textContent = val.toLocaleString('it-IT') + suffix;
+      if (t<1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}, { threshold:.4 });
+statEls.forEach(el=>statIo.observe(el));
+
+/* ---------- 3D pointer tilt (desktop only) ---------- */
+const canTilt = matchMedia('(hover:hover) and (pointer:fine)').matches;
+if (canTilt){
+  document.querySelectorAll('[data-tilt], .hc-card, .stat-card').forEach(card=>{
+    card.addEventListener('mousemove', (e)=>{
+      const r = card.getBoundingClientRect();
+      const px = (e.clientX - r.left)/r.width - .5;
+      const py = (e.clientY - r.top)/r.height - .5;
+      card.style.transform = `perspective(60rem) rotateX(${(-py*10).toFixed(2)}deg) rotateY(${(px*10).toFixed(2)}deg) scale(1.02)`;
+    });
+    card.addEventListener('mouseleave', ()=>{ card.style.transform = ''; });
+  });
+}
+
+/* ---------- Hero parallax ---------- */
+const heroLayer = document.getElementById('hero-parallax');
+const heroSection = document.getElementById('home');
+lenis.on('scroll', ()=>{
+  const r = heroSection.getBoundingClientRect();
+  const progress = Math.min(1, Math.max(0, 1 - (r.bottom / (r.height + window.innerHeight))));
+  heroLayer.style.transform = `translateY(${(progress*12).toFixed(2)}%)`;
+});
+
+/* ---------- Nav overlay ---------- */
+const navOverlay = document.getElementById('nav-overlay');
+function openNav(){ navOverlay.classList.add('open'); stopScroll(); }
+function closeNav(){ if(!navOverlay.classList.contains('open')) return; navOverlay.classList.remove('open'); startScroll(); }
+document.getElementById('burger-btn').addEventListener('click', openNav);
+document.getElementById('nav-close').addEventListener('click', closeNav);
+
+/* ---------- Contact modal ---------- */
+const modal = document.getElementById('contact-modal');
+const modalTitle = document.getElementById('modal-title');
+const modalForm = document.getElementById('contact-form');
+const modalSuccess = document.getElementById('modal-success');
+const modalSuccessText = document.getElementById('modal-success-text');
+const subjectSelect = document.getElementById('f-subject');
+const submitBtn = document.getElementById('submit-btn');
+
+function openModal(mode){
+  modal.classList.add('open'); stopScroll();
+  modalForm.classList.remove('hide'); modalSuccess.classList.remove('show');
+  if (mode==='lavoro'){
+    modalTitle.textContent = 'Entra nel nostro equipaggio';
+    subjectSelect.value = 'Candidatura — Autista';
+  } else {
+    modalTitle.textContent = 'Raccontaci il tuo progetto';
+    subjectSelect.value = 'Richiesta informazioni';
+  }
+  setTimeout(()=> document.getElementById('f-name').focus(), 150);
+}
+function closeModal(){
+  if (!modal.classList.contains('open')) return;
+  modal.classList.remove('open'); startScroll();
+  setTimeout(()=>{ modalForm.reset(); modalForm.classList.remove('hide'); modalSuccess.classList.remove('show'); }, 350);
+}
+document.querySelectorAll('[data-open-modal]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{ closeNav(); openModal(btn.dataset.openModal); });
+});
+document.getElementById('modal-close').addEventListener('click', closeModal);
+document.getElementById('modal-done').addEventListener('click', closeModal);
+modal.addEventListener('click', (e)=>{ if (e.target===modal) closeModal(); });
+document.addEventListener('keydown', (e)=>{
+  if (e.key!=='Escape') return;
+  closeModal(); closeNav(); closeLightbox();
+});
+
+modalForm.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const name = document.getElementById('f-name').value.trim();
+  submitBtn.textContent = 'Invio…'; submitBtn.disabled = true;
+  setTimeout(()=>{
+    modalForm.classList.add('hide');
+    modalSuccess.classList.add('show');
+    modalSuccessText.textContent = `Grazie${name ? ', '+name.split(' ')[0] : ''} — ti ricontatteremo entro un giorno lavorativo.`;
+    submitBtn.textContent = 'Invia richiesta'; submitBtn.disabled = false;
+  }, 700);
+});
+
+/* ---------- Gallery lightbox ---------- */
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lb-img');
+function openLightbox(src, alt){
+  lbImg.src = src; lbImg.alt = alt;
+  lightbox.classList.add('open'); stopScroll();
+}
+function closeLightbox(){
+  if (!lightbox.classList.contains('open')) return;
+  lightbox.classList.remove('open'); startScroll();
+}
+document.querySelectorAll('.gallery-item').forEach(item=>{
+  item.addEventListener('click', ()=> openLightbox(item.dataset.full, item.querySelector('img').alt));
+});
+document.getElementById('lb-close').addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', (e)=>{ if (e.target===lightbox) closeLightbox(); });
+</script>
+</body>
+</html>
