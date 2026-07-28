@@ -142,9 +142,19 @@ body.is-ready #site-header{ opacity:1; transform:translateY(0); }
 /* ---------- Hero ---------- */
 #home{ position:relative; isolation:isolate; overflow:hidden; border-radius:0 0 2rem 2rem; min-height:38rem; height:calc(100svh); background:var(--ink-deep); color:#fff; display:flex; flex-direction:column; }
 .hero-plate{ position:absolute; inset:0; z-index:-2; overflow:hidden; }
-.hero-plate .layer{ position:absolute; left:0; right:0; top:-14%; height:130%; width:100%; will-change:transform; }
+.hero-plate .layer{ position:absolute; left:0; right:0; top:-14%; height:130%; width:100%; z-index:0; will-change:transform; }
 .hero-plate img{ width:100%; height:100%; object-fit:cover; }
-.hero-plate .overlay{ position:absolute; inset:0; background:linear-gradient(to bottom, rgba(7,20,16,.72), rgba(7,20,16,.35) 45%, rgba(7,20,16,.85)); }
+.hero-plate .overlay{ position:absolute; inset:0; z-index:3; background:linear-gradient(to bottom, rgba(7,20,16,.72), rgba(7,20,16,.35) 45%, rgba(7,20,16,.85)); }
+#hero-liquid{ position:absolute; inset:0; width:100%; height:100%; z-index:1; }
+.hero-particles{ position:absolute; inset:0; z-index:2; overflow:hidden; pointer-events:none; }
+.hero-chip{ position:absolute; width:2.4rem; height:2.4rem; border-radius:999px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22); backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,.75); }
+.hero-chip svg{ width:1.05rem; height:1.05rem; }
+@media (max-width:768px){ .hero-particles{ display:none; } }
+.hero-hint{ position:absolute; top:6.5rem; right:1.5rem; z-index:4; font-size:.68rem; text-transform:uppercase; letter-spacing:.08em; color:rgba(255,255,255,.55); opacity:0; transition:opacity .6s ease; }
+@media (min-width:768px){ .hero-hint{ display:block; } }
+@media (max-width:767px){ .hero-hint{ display:none; } }
+body.is-ready .hero-hint{ opacity:1; transition-delay:1.1s; }
+#home:hover .hero-hint{ opacity:0; transition-delay:0s; }
 .hero-title-wrap{ padding:6rem 1.5rem 0; margin-top:auto; }
 @media (min-width:640px){ .hero-title-wrap{ padding-inline:2.5rem; } }
 #hero-title{ font-size:8.6vw; line-height:.92; font-weight:700; text-transform:uppercase; letter-spacing:-.01em; }
@@ -458,12 +468,15 @@ address{ font-style:normal; }
 <main>
   <!-- ===== Hero ===== -->
   <section id="home">
-    <div class="hero-plate">
+    <div class="hero-plate" id="hero-plate">
       <div class="layer" id="hero-parallax">
-        <img src="https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-1.jpg" alt="Flotta di mezzi Zampieri Holding Natural Power Transport" fetchpriority="high" loading="eager" />
+        <img id="hero-base-img" src="https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-1.jpg" alt="Flotta di mezzi Zampieri Holding Natural Power Transport" fetchpriority="high" loading="eager" />
+        <canvas id="hero-liquid" aria-hidden="true"></canvas>
       </div>
+      <div class="hero-particles" id="hero-particles" aria-hidden="true"></div>
       <div class="overlay"></div>
     </div>
+    <p class="hero-hint" id="hero-hint">Muovi il cursore per scoprire di più</p>
     <div class="hero-title-wrap">
       <h1 id="hero-title" data-reveal>
         <span class="word-mask"><span class="word-inner" style="--d:0s">Trasporti</span></span>
@@ -1162,14 +1175,155 @@ if (canTilt){
   });
 }
 
-/* ---------- Hero parallax ---------- */
+/* ---------- Hero parallax + pointer tilt ---------- */
 const heroLayer = document.getElementById('hero-parallax');
 const heroSection = document.getElementById('home');
+let heroScrollShift = 0, heroTiltX = 0, heroTiltY = 0;
+function applyHeroTransform(){
+  heroLayer.style.transform = `translate(${heroTiltX.toFixed(2)}%, calc(${heroScrollShift.toFixed(2)}% + ${heroTiltY.toFixed(2)}%))`;
+}
 lenis.on('scroll', ()=>{
   const r = heroSection.getBoundingClientRect();
   const progress = Math.min(1, Math.max(0, 1 - (r.bottom / (r.height + window.innerHeight))));
-  heroLayer.style.transform = `translateY(${(progress*12).toFixed(2)}%)`;
+  heroScrollShift = progress*12;
+  applyHeroTransform();
 });
+if (canTilt){
+  heroSection.addEventListener('mousemove', (e)=>{
+    const r = heroSection.getBoundingClientRect();
+    heroTiltX = ((e.clientX - r.left)/r.width - .5) * 3;
+    heroTiltY = ((e.clientY - r.top)/r.height - .5) * 3;
+    applyHeroTransform();
+  });
+  heroSection.addEventListener('mouseleave', ()=>{ heroTiltX = 0; heroTiltY = 0; applyHeroTransform(); });
+}
+
+/* ---------- Hero liquid reveal (cursor brush swaps in the branded truck shot) ---------- */
+(function(){
+  if (reduceMotion) return;
+  const canvas = document.getElementById('hero-liquid');
+  const afterImg = new Image();
+  afterImg.src = 'https://zampieriholding.it/wp-content/uploads/2021/05/fiano-romano-4.jpg';
+  const ctx = canvas.getContext('2d');
+  const brushCanvas = document.createElement('canvas');
+  const brushCtx = brushCanvas.getContext('2d');
+  let coverCanvas = null, coverCtx = null, ready = false;
+  let dpr = Math.min(window.devicePixelRatio||1, 2);
+  const brushRadiusCss = 140;
+  let radius = brushRadiusCss*dpr;
+  const decay = 0.02;
+  let points = [], last = null, idle = 0;
+
+  function buildCover(w,h){
+    if (!afterImg.complete || !afterImg.naturalWidth) return;
+    coverCanvas = document.createElement('canvas');
+    coverCanvas.width = w; coverCanvas.height = h;
+    coverCtx = coverCanvas.getContext('2d');
+    const iw = afterImg.naturalWidth, ih = afterImg.naturalHeight;
+    const scale = Math.max(w/iw, h/ih);
+    const dw = iw*scale, dh = ih*scale;
+    coverCtx.drawImage(afterImg, (w-dw)/2, (h-dh)/2, dw, dh);
+    ready = true;
+  }
+  function sizeCanvas(){
+    const rect = heroLayer.getBoundingClientRect();
+    dpr = Math.min(window.devicePixelRatio||1, 2);
+    canvas.width = Math.round(rect.width*dpr);
+    canvas.height = Math.round(rect.height*dpr);
+    radius = brushRadiusCss*dpr;
+    brushCanvas.width = Math.ceil(radius*2);
+    brushCanvas.height = Math.ceil(radius*2);
+    buildCover(canvas.width, canvas.height);
+  }
+  afterImg.addEventListener('load', sizeCanvas);
+  new ResizeObserver(sizeCanvas).observe(heroLayer);
+  sizeCanvas();
+
+  window.addEventListener('pointermove', (e)=>{
+    const rect = canvas.getBoundingClientRect();
+    const x = (e.clientX-rect.left)*dpr, y = (e.clientY-rect.top)*dpr;
+    if (x < -radius || x > canvas.width+radius || y < -radius || y > canvas.height+radius){ last = null; return; }
+    if (last){
+      const dx = x-last.x, dy = y-last.y, dist = Math.hypot(dx,dy);
+      const step = Math.max(radius*0.3, 1);
+      const n = Math.min(Math.ceil(dist/step), 60);
+      for (let i=1;i<=n;i++) points.push({ x:last.x+dx*(i/n), y:last.y+dy*(i/n) });
+    } else points.push({x,y});
+    last = { x, y };
+  }, { passive:true });
+
+  function stamp(x,y){
+    const diam = brushCanvas.width, c = radius;
+    brushCtx.clearRect(0,0,diam,diam);
+    brushCtx.globalCompositeOperation = 'source-over';
+    const grad = brushCtx.createRadialGradient(c,c,0,c,c,radius);
+    grad.addColorStop(0,'rgba(255,255,255,1)'); grad.addColorStop(.55,'rgba(255,255,255,.82)'); grad.addColorStop(1,'rgba(255,255,255,0)');
+    brushCtx.fillStyle = grad; brushCtx.fillRect(0,0,diam,diam);
+    if (coverCtx){
+      brushCtx.globalCompositeOperation = 'source-in';
+      brushCtx.drawImage(coverCanvas, x-c, y-c, diam, diam, 0, 0, diam, diam);
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.drawImage(brushCanvas, x-c, y-c);
+  }
+  function tick(){
+    requestAnimationFrame(tick);
+    if (!ready || !canvas.width) return;
+    const drawing = points.length>0;
+    if (drawing) idle = 0; else { idle++; if (idle>120) return; }
+    const fade = drawing ? decay : Math.min(decay + idle*0.004, .5);
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.fillStyle = `rgba(0,0,0,${fade})`;
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    if (drawing){ points.forEach(p=>stamp(p.x,p.y)); points = []; }
+    if (idle===120) ctx.clearRect(0,0,canvas.width,canvas.height);
+  }
+  requestAnimationFrame(tick);
+})();
+
+/* ---------- Floating hero chips, repelled by the pointer ---------- */
+(function(){
+  const wrap = document.getElementById('hero-particles');
+  if (!wrap || reduceMotion || matchMedia('(max-width:768px)').matches) return;
+  const positions = [
+    { top:'9.5%', left:'6%' }, { top:'9%', left:'38%' },
+    { top:'9.5%', left:'62%' }, { top:'9%', left:'94%' },
+  ];
+  const mark = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 17c5 0 6-9 11-9"/><circle cx="18" cy="7" r="2.2" fill="currentColor" stroke="none"/></svg>';
+  const chips = positions.map(pos=>{
+    const el = document.createElement('div');
+    el.className = 'hero-chip';
+    el.style.top = pos.top; el.style.left = pos.left;
+    el.innerHTML = mark;
+    el.dataset.phase = String(Math.random()*Math.PI*2);
+    el.dataset.speed = String(6 + Math.random()*5);
+    wrap.appendChild(el);
+    return el;
+  });
+  if (!canTilt) return;
+  let mouseX = -9999, mouseY = -9999;
+  heroSection.addEventListener('mousemove', (e)=>{
+    const r = wrap.getBoundingClientRect();
+    mouseX = e.clientX - r.left; mouseY = e.clientY - r.top;
+  });
+  heroSection.addEventListener('mouseleave', ()=>{ mouseX = -9999; mouseY = -9999; });
+  function tick(){
+    requestAnimationFrame(tick);
+    const t = performance.now()*0.001;
+    const wrapRect = wrap.getBoundingClientRect();
+    chips.forEach(chip=>{
+      const r = chip.getBoundingClientRect();
+      const cx = r.left - wrapRect.left + r.width/2, cy = r.top - wrapRect.top + r.height/2;
+      const dx = cx-mouseX, dy = cy-mouseY, dist = Math.hypot(dx,dy) || 1;
+      let rx = 0, ry = 0;
+      if (dist < 140){ const force = (140-dist)/140; rx = (dx/dist)*force*36; ry = (dy/dist)*force*36; }
+      const phase = t*(1/Number(chip.dataset.speed))*Math.PI*2 + Number(chip.dataset.phase);
+      const floatY = Math.sin(phase)*10;
+      chip.style.transform = `translate(${rx.toFixed(1)}px, ${(ry+floatY).toFixed(1)}px)`;
+    });
+  }
+  requestAnimationFrame(tick);
+})();
 
 /* ---------- Nav overlay ---------- */
 const navOverlay = document.getElementById('nav-overlay');
