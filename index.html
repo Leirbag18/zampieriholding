@@ -345,6 +345,19 @@ blockquote{ font-size:1.4rem; line-height:1.5; font-weight:500; margin-top:1rem;
 /* ---------- Lavora con noi ---------- */
 #lavora-con-noi{ background:var(--bg); padding:5rem 1.25rem; }
 @media (min-width:640px){ #lavora-con-noi{ padding:6rem 2.5rem; } }
+
+/* ---------- Dove siamo (maps) ---------- */
+#dove-siamo{ background:var(--surface); padding:5rem 1.25rem; }
+@media (min-width:640px){ #dove-siamo{ padding:6rem 2.5rem; } }
+.map-grid{ margin-top:3rem; display:grid; grid-template-columns:1fr; gap:1.5rem; }
+@media (min-width:760px){ .map-grid{ grid-template-columns:1fr 1fr; } }
+.map-card{ border-radius:var(--radius-card); overflow:hidden; background:var(--surface-card); box-shadow:0 1rem 2.5rem rgba(7,20,16,.08); }
+.map-frame{ position:relative; aspect-ratio:16/10; filter:grayscale(.35) contrast(1.05) brightness(.97); }
+.map-frame iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+.map-caption{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:1.1rem 1.35rem; flex-wrap:wrap; }
+.map-caption b{ display:block; font-size:.95rem; }
+.map-caption span{ font-size:.8rem; color:var(--muted); }
+.map-caption a{ font-size:.78rem; font-weight:600; text-decoration:underline; white-space:nowrap; }
 .lavora-inner{ display:flex; flex-direction:column; gap:2rem; border-top:1px solid var(--hairline); padding-top:3rem; }
 @media (min-width:760px){ .lavora-inner{ flex-direction:row; justify-content:space-between; align-items:flex-end; } }
 .lavora-inner h2{ font-size:2.4rem; max-width:16ch; }
@@ -809,6 +822,39 @@ address{ font-style:normal; }
       </button>
     </div>
   </section>
+
+  <!-- ===== Dove siamo ===== -->
+  <section id="dove-siamo">
+    <div class="shell">
+      <div class="section-head" data-reveal>
+        <div class="eyebrow dark">Dove siamo</div>
+        <h2>
+          <span class="line-mask"><span class="line-inner" style="--d:0s">Le nostre</span></span>
+          <span class="line-mask"><span class="line-inner" style="--d:.12s">sedi in Italia</span></span>
+        </h2>
+      </div>
+      <div class="map-grid">
+        <div class="map-card" data-reveal-up style="--d:0s">
+          <div class="map-frame">
+            <iframe title="Mappa sede legale, Via Lima 41, Roma" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Via+Lima+41,+00198+Roma+RM&output=embed"></iframe>
+          </div>
+          <div class="map-caption">
+            <div><b>Sede legale</b><span>Via Lima 41, 00198 Roma (RM)</span></div>
+            <a href="https://goo.gl/maps/Q998ZBPbuw6uA3kr9" target="_blank" rel="noopener">Apri in Maps →</a>
+          </div>
+        </div>
+        <div class="map-card" data-reveal-up style="--d:.12s">
+          <div class="map-frame">
+            <iframe title="Mappa sede operativa, Via Procoio 49, Fiano Romano" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Via+Procoio+49,+Fiano+Romano+RM&output=embed"></iframe>
+          </div>
+          <div class="map-caption">
+            <div><b>Sede operativa</b><span>Via Procoio 49, Fiano Romano (RM)</span></div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Via+Procoio+49+Fiano+Romano+RM" target="_blank" rel="noopener">Apri in Maps →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <!-- ===== Footer ===== -->
@@ -850,6 +896,7 @@ address{ font-style:normal; }
         <li><a href="#flotta" data-scroll>La nostra flotta</a></li>
         <li><a href="#sostenibilita" data-scroll>Sostenibilità</a></li>
         <li><a href="#lavora-con-noi" data-scroll>Lavora con noi</a></li>
+        <li><a href="#dove-siamo" data-scroll>Dove siamo</a></li>
         <li><a href="https://zampieriholding.it/whistleblowing" target="_blank" rel="noopener">Whistleblowing</a></li>
       </ul>
     </nav>
