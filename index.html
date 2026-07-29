@@ -199,8 +199,17 @@ body.is-ready .hero-hint{ opacity:1; transition-delay:1.1s; }
 @media (min-width:640px){ .status-bar .center{ display:inline; } }
 
 /* ---------- Trust / ghost carousel ---------- */
-#perche-noi{ position:relative; isolation:isolate; overflow:hidden; background:var(--bg); padding:5rem 1.25rem; }
-@media (min-width:640px){ #perche-noi{ padding:6.5rem 2.5rem; } }
+#perche-noi{ position:relative; isolation:isolate; background:var(--bg); }
+.perche-scroll-track{ position:relative; }
+.perche-pin{ padding:5rem 1.25rem; overflow:hidden; }
+@media (min-width:640px){
+  .perche-pin{ padding:6.5rem 2.5rem; }
+}
+/* Pin the section while scrolling through it, stepping the carousel one photo per screen of scroll — only on desktop, where the layout has room to stay fixed. */
+@media (min-width:640px) and (hover:hover) and (pointer:fine){
+  .perche-scroll-track{ height:300vh; }
+  .perche-pin{ position:sticky; top:0; height:100vh; display:flex; flex-direction:column; justify-content:center; overflow:hidden; }
+}
 .trust-top{ position:relative; z-index:20; display:flex; flex-direction:column; gap:1.5rem; }
 @media (min-width:640px){ .trust-top{ flex-direction:row; justify-content:space-between; } }
 .percent-badge{ width:7rem; height:7rem; border-radius:999px; background:var(--surface); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:.15rem; flex:none; }
@@ -564,48 +573,52 @@ address{ font-style:normal; }
 
   <!-- ===== Trust / ghost carousel ===== -->
   <section id="perche-noi">
-    <div class="trust-top">
-      <div class="percent-badge" data-reveal-scale>
-        <b>100%</b>
-        <span>Qualità e sicurezza in ogni consegna</span>
-      </div>
-      <div class="badge-card" data-reveal-up style="--d:.12s">
-        <div class="badge-chip">#01</div>
-        <div>
-          <h3>Perché scegliere Zampieri Holding</h3>
-          <p>Gestiamo con grande accuratezza ed estrema affidabilità tutti i processi di scambio delle informazioni, offrendo soluzioni di elevata qualità, puntuali e complete.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="ghost-heading">
-      <div class="ghost-row show" id="ghost-row-1">
-        <span class="ghost-word"><span id="gw-0"></span></span>
-        <span class="ghost-word"><span id="gw-1"></span></span>
-      </div>
-      <div class="ghost-row show" id="ghost-row-2">
-        <span class="ghost-word"><span class="ink" id="gw-2"></span></span>
-        <span class="ghost-word"><span id="gw-3"></span></span>
-      </div>
-      <div class="coach-wrap">
-        <div class="coach-card">
-          <div class="coach-figure" id="coach-figure">
-            <img class="show" data-idx="0" src="https://zampieriholding.it/wp-content/uploads/2021/05/sede_treviso-3.jpg" alt="Team Zampieri Holding" />
-            <img data-idx="1" src="https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-10.jpg" alt="Sala operativa Zampieri Holding" />
-            <img data-idx="2" src="https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-14.jpg" alt="Flotta ZH Green Transport" />
-            <div class="coach-caption">
-              <b id="coach-name">Il nostro Team</b>
-              <span id="coach-role">In ogni sede</span>
+    <div class="perche-scroll-track" id="perche-track">
+      <div class="perche-pin">
+        <div class="trust-top">
+          <div class="percent-badge" data-reveal-scale>
+            <b>100%</b>
+            <span>Qualità e sicurezza in ogni consegna</span>
+          </div>
+          <div class="badge-card" data-reveal-up style="--d:.12s">
+            <div class="badge-chip">#01</div>
+            <div>
+              <h3>Perché scegliere Zampieri Holding</h3>
+              <p>Gestiamo con grande accuratezza ed estrema affidabilità tutti i processi di scambio delle informazioni, offrendo soluzioni di elevata qualità, puntuali e complete.</p>
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="trust-controls">
-      <button class="arrow-btn outline prev" id="trust-prev" aria-label="Precedente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-      <div class="dots" id="trust-dots"></div>
-      <button class="arrow-btn solid next" id="trust-next" aria-label="Successivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <div class="ghost-heading">
+          <div class="ghost-row show" id="ghost-row-1">
+            <span class="ghost-word"><span id="gw-0"></span></span>
+            <span class="ghost-word"><span id="gw-1"></span></span>
+          </div>
+          <div class="ghost-row show" id="ghost-row-2">
+            <span class="ghost-word"><span class="ink" id="gw-2"></span></span>
+            <span class="ghost-word"><span id="gw-3"></span></span>
+          </div>
+          <div class="coach-wrap">
+            <div class="coach-card">
+              <div class="coach-figure" id="coach-figure">
+                <img class="show" data-idx="0" src="https://zampieriholding.it/wp-content/uploads/2021/05/sede_treviso-3.jpg" alt="Team Zampieri Holding" />
+                <img data-idx="1" src="https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-10.jpg" alt="Sala operativa Zampieri Holding" />
+                <img data-idx="2" src="https://zampieriholding.it/wp-content/uploads/2021/03/I-nostri-mezzi-14.jpg" alt="Flotta ZH Green Transport" />
+                <div class="coach-caption">
+                  <b id="coach-name">Il nostro Team</b>
+                  <span id="coach-role">In ogni sede</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="trust-controls">
+          <button class="arrow-btn outline prev" id="trust-prev" aria-label="Precedente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <div class="dots" id="trust-dots"></div>
+          <button class="arrow-btn solid next" id="trust-next" aria-label="Successivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1084,7 +1097,7 @@ try{
   lenis = {
     stop(){}, start(){},
     on(event, cb){ if (event==='scroll') window.addEventListener('scroll', ()=>cb({ scroll: window.scrollY }), { passive:true }); },
-    scrollTo(el, opts={}){ const top = el.getBoundingClientRect().top + window.scrollY - (opts.offset||0); window.scrollTo({ top, behavior:'smooth' }); },
+    scrollTo(target, opts={}){ const top = typeof target==='number' ? target : (target.getBoundingClientRect().top + window.scrollY - (opts.offset||0)); window.scrollTo({ top, behavior:'smooth' }); },
   };
 }
 
@@ -1216,7 +1229,7 @@ const trustDots = document.getElementById('trust-dots');
 trustSlides.forEach((_,i)=>{
   const b = document.createElement('button');
   if (i===0) b.classList.add('active');
-  b.addEventListener('click', ()=>setTrust(i));
+  b.addEventListener('click', ()=>goToTrust(i));
   trustDots.appendChild(b);
 });
 function setTrust(i){
@@ -1231,9 +1244,36 @@ function setTrust(i){
   [...trustDots.children].forEach((d,idx)=>d.classList.toggle('active', idx===trustIndex));
 }
 setTrust(0);
-document.getElementById('trust-prev').addEventListener('click', ()=>setTrust(trustIndex-1));
-document.getElementById('trust-next').addEventListener('click', ()=>setTrust(trustIndex+1));
-setInterval(()=> setTrust(trustIndex+1), 6000);
+
+/* Scroll-pinned stepping: the section stays pinned (position:sticky) for 300vh of
+   scroll on desktop, one screen per photo, so all 3 are seen before the page moves on. */
+const percheTrack = document.getElementById('perche-track');
+const isPerchePinned = () => matchMedia('(min-width:640px) and (hover:hover) and (pointer:fine)').matches;
+let lastScrollTrustIndex = 0;
+function updateTrustFromScroll(){
+  if (!isPerchePinned()) return;
+  const rect = percheTrack.getBoundingClientRect();
+  const total = rect.height - window.innerHeight;
+  if (total <= 0) return;
+  const progress = Math.min(1, Math.max(0, -rect.top / total));
+  const idx = Math.min(trustSlides.length-1, Math.floor(progress * trustSlides.length));
+  if (idx !== lastScrollTrustIndex){
+    lastScrollTrustIndex = idx;
+    setTrust(idx);
+  }
+}
+lenis.on('scroll', updateTrustFromScroll);
+function goToTrust(i){
+  if (!isPerchePinned()){ setTrust(i); return; }
+  const target = (i+trustSlides.length)%trustSlides.length;
+  const rect = percheTrack.getBoundingClientRect();
+  const total = rect.height - window.innerHeight;
+  const targetProgress = (target + .5) / trustSlides.length;
+  lenis.scrollTo(window.scrollY + rect.top + targetProgress*total, { duration:1 });
+}
+document.getElementById('trust-prev').addEventListener('click', ()=>goToTrust(trustIndex-1));
+document.getElementById('trust-next').addEventListener('click', ()=>goToTrust(trustIndex+1));
+if (!isPerchePinned()) setInterval(()=> setTrust(trustIndex+1), 6000);
 
 /* ---------- Stats count-up ---------- */
 const statEls = document.querySelectorAll('[data-count]');
